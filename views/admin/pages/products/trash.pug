@@ -1,6 +1,9 @@
 extends ../../layouts/default.pug
+include ../../mixins/alert.pug
 
-block main 
+
+block main
+  +alert-success("5000") 
   h1 Trang danh sách sản phẩm bị xóa
   a.btn.btn-primary(href="/admin/products") Trở lại trang sản phẩm
   if (typeof deletedProducts !== 'undefined' && deletedProducts.length > 0)

@@ -78,7 +78,7 @@ module.exports.changeMulti = async (req, res) =>{
                 deleted: true,
                 deletedAt: new Date(),
             });
-            req.flash('success', 'Cập nhập thành công!');
+            req.flash('success', 'Sản phẩm đã được xóa!');
             break;
         case "change-position":
             for (const element of ids) {
@@ -88,6 +88,7 @@ module.exports.changeMulti = async (req, res) =>{
                     { position: parseInt(position) }
                 );
             }
+            req.flash('success', 'Thay đổi vị trí thành công!');
             break
         default:
             break;
@@ -109,6 +110,7 @@ module.exports.deleteItem = async (req, res)=>{
 
     //Xóa cứng (xóa luôn trong database)
     //await Product.deleteOne({_id: id})
+    req.flash('success', 'Sản phẩm đã được xóa!');
     res.redirect('back')
 }
 
@@ -131,10 +133,11 @@ module.exports.requireTrash = async (req, res)=>{
 
     if(require=="restore"){
         await Product.updateOne({_id: id}, {deleted: false})
+        req.flash('success', 'Khôi phục thành công!');
     }
     else if(require=="delete"){
         await Product.deleteOne({_id: id})
+        req.flash('success', 'Sản phẩm đã được xóa!');
     }
     res.redirect('back')
-    req.flash('success', 'Cập nhập thành công!');
 }
