@@ -115,9 +115,9 @@ if(formChangeMulti){
                 const id = button.value
             
                 if(typechange=="change-position"){
-                    const parentRow = button.closest("tr");//Đi ra ngoài 1 nấc là thẻ cha "tr"
-
-                    const position = parentRow.querySelector("input[name='position']").position; //Từ thẻ cha "tr" truy vấn đến thẻ con "input"
+                    const position = button.closest("tr")//Ra 1 bậc để đến thằng cha là "tr"
+                                           .querySelector("input[name='position']") //Từ thẻ cha "tr" truy vấn đến thẻ con "input"
+                                           .value;
                     if (position) {
                         ids.push(id + '-' + position);
                     }

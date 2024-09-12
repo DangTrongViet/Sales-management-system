@@ -31,7 +31,10 @@ module.exports.index = async (req, res)=>{
     }, req.query, countProducts)
 
     //Render ra giao diện
-    const products = await Product.find(find).limit(objectPagination.limitItem).skip(objectPagination.skip) //limit: giới hạn SL sản phẩm mỗi trang, skip: số sản phẩm bỏ qua 
+    const products = await Product.find(find)
+                                  .sort({position: "desc"})//Sắp xếp giảm gần
+                                  .limit(objectPagination.limitItem)
+                                  .skip(objectPagination.skip) //limit: giới hạn SL sản phẩm mỗi trang, skip: số sản phẩm bỏ qua 
 
     res.render("admin/pages/products/index.pug", {
         pageTitle: "Danh sách sản phẩm",
@@ -72,13 +75,13 @@ module.exports.changeMulti = async (req, res) =>{
             });
             break;
         case "change-position":
-            await Promise.all(ids.map(async (idPosition) => {
-                const [id, position] = idPosition.split("-");
-                await Product.updateMany(
-                    { _id: id },  // Tìm product theo id
-                    { $set: { position: position } }  // Cập nhật position tương ứng
+            for (const element of ids) {
+                const [id, position] = element.split("-"); //destructering
+                await Product.updateOne(
+                    { _id: id },  
+                    { position: parseInt(position) }
                 );
-            }));
+            }
             break
         default:
             break;
