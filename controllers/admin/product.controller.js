@@ -52,6 +52,9 @@ module.exports.changeStatus = async (req, res) =>{
     const id = req.params.id
 
     await Product.updateOne({_id: id}, {status: status})//Cập nhập thay đổi vào database
+    
+    req.flash('success', 'Cập nhập thành công!');//Thông báo khi cập nhập
+    
     res.redirect('back')// được sử dụng để chuyển hướng người dùng trở lại trang trước đó mà họ vừa truy cập.
 }
 
@@ -64,15 +67,18 @@ module.exports.changeMulti = async (req, res) =>{
     switch (type) {
         case "active":
             await Product.updateMany({ _id: { $in: ids } }, {status: "active"})
+            req.flash('success', 'Cập nhập thành công!');
             break;
         case "inactive":
             await Product.updateMany({ _id: { $in: ids } }, {status: "inactive"})
+            req.flash('success', 'Cập nhập thành công!');
             break;
         case "delete-all":
             await Product.updateMany({ _id: { $in: ids } }, {
                 deleted: true,
                 deletedAt: new Date(),
             });
+            req.flash('success', 'Cập nhập thành công!');
             break;
         case "change-position":
             for (const element of ids) {
@@ -130,4 +136,5 @@ module.exports.requireTrash = async (req, res)=>{
         await Product.deleteOne({_id: id})
     }
     res.redirect('back')
+    req.flash('success', 'Cập nhập thành công!');
 }
