@@ -13,6 +13,8 @@ router.patch('/change-multi', controller.changeMulti) //Gửi dữ liệu status
 
 router.delete('/delete/:id', controller.deleteItem)    
 
+router.get('/create', controller.create)
+
 //Thùng rác
 router.get("/trash", controller.trash)
 

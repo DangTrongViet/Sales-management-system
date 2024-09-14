@@ -141,3 +141,9 @@ module.exports.requireTrash = async (req, res)=>{
     }
     res.redirect('back')
 }
+
+//---------------------------------------------------------------------
+//5. [GET] "/admin/products/create" Tạo mới 1 sản phẩm
+module.exports.create = async (req, res)=>{
+    res.send("oke")
+}

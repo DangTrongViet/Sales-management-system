@@ -26,8 +26,14 @@ block main
         .col-md-12.text-right
           a.btn.btn-secondary.btn-sm.ml-2(href=`${prefixAdmin}/products/trash`) Thùng rác  <!-- Đưa nút Thùng rác xuống một hàng riêng -->
     .card-body
-      +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
-
+      .row 
+        .col-8
+          +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
+        .col-4 
+          a(
+            href= `${prefixAdmin}/products/create`
+            class= "btn btn-outline-success"
+          ) + Thêm mới
       table(
         class = "table table-hover table-sm"
         checkbox-multi
@@ -94,7 +100,7 @@ block main
   +pagination(pagination)
 
   //-Nếu dùng thư viện mothod-override thì method luôn luôn là POST để nó có thể chuyển thành phương thức khác khi gửi lên server
-  //-form chỉnh sửa trạng thái
+  //-Form chỉnh sửa (hoạt động, ngừng hoạt động, xóa, thay đổi vị trí) của nhiều sản phẩm
   form(
     action="" 
     method="POST"
@@ -102,7 +108,7 @@ block main
     data-path=`${prefixAdmin}/products/change-status`
   )
 
-  //- form xóa sản phẩm
+  //- Form xóa 1 sản phẩm
   form(
     action="" 
     method="POST"
