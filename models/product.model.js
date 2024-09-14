@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema(
     thumbnail:String,
     status:String,
     position:Number,
-    deleted:{ type: Boolean, deFault: false},
+    deleted:{ type: Boolean, default: false},
     deletedAt: Date
     }, 
     {
