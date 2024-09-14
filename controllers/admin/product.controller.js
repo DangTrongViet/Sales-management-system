@@ -2,7 +2,7 @@ const Product = require("../../models/product.model.js")
 const filterStatusHelper = require("../../helpers/filterStatus.js")
 const searchHelper = require("../../helpers/search.js")
 const paginationHelper = require("../../helpers/pagination.js")
-
+const systemConfig = require("../../config/system.js")
 //1. [GET] /admin/products
 module.exports.index = async (req, res)=>{
     //1. Xử lý lọc sản phẩm
@@ -58,7 +58,7 @@ module.exports.changeStatus = async (req, res) =>{
     res.redirect('back')// được sử dụng để chuyển hướng người dùng trở lại trang trước đó mà họ vừa truy cập.
 }
 
-//2. [PATCH] /admin/products/change-multi/:status/:id  (Thay đổi trạng thái hoạt động/dừng hoạt động/xóa sản phẩm/ Thay đổi vị trí -> của nhiều sản phẩm)
+//2. [PATCH] /admin/products/change-multi/:status/:id  (Thay đổi trạng thái hoạt động/dừng hoạt động/xóa sản phẩm/ Thay đổi vị trí) -> của nhiều sản phẩm
 module.exports.changeMulti = async (req, res) =>{
     console.log(req.body)
     let type = req.body.type
@@ -115,7 +115,8 @@ module.exports.deleteItem = async (req, res)=>{
 }
 
 //---------------------------------------------------------------------
-//4. [PATCH] /admin/products/trash  (Thùng rác)
+//4. Thùng rác
+// [PATCH] /admin/products/trash (router nay để render thùng rác ra giao diện)
 module.exports.trash = async (req, res)=>{
     const deletedProducts = await Product.find({deleted: true})
     console.log(deletedProducts)
@@ -124,7 +125,7 @@ module.exports.trash = async (req, res)=>{
         deletedProducts: deletedProducts || []
     })
 }
-// "/admin/products/trash/:require/:id" (Khôi phục hoặc xóa vĩnh viễn trong thùng rác)
+// [PATCH] "/admin/products/trash/:require/:id" (router này để khôi phục hoặc xóa vĩnh viễn trong thùng rác)
 module.exports.requireTrash = async (req, res)=>{
     const deletedProducts = await Product.find({deleted: true})
 
@@ -143,15 +144,31 @@ module.exports.requireTrash = async (req, res)=>{
 }
 
 //---------------------------------------------------------------------
-//5. 
-// [GET] "/admin/products/create" Tạo mới 1 sản phẩm
+//5. Tạo mới 1 sản phẩm
+// [GET] "/admin/products/create" (router để render ra giao diện)
 module.exports.create = async (req, res)=>{
     res.render("admin/pages/products/create.pug", {
         pageTitle: "Thêm mới sản phẩm"
     })
 }
 
-// [POST] "/admin/products/create" 
+// [POST] "/admin/products/create" (router để gửi in4 sản phẩm lên server)
 module.exports.createPost = async (req, res)=>{
-    res.send("oke")
+    req.body.price = parseInt(req.body.price)
+    req.body.discountPercentage = parseInt(req.body.discountPercentage)
+    req.body.stock = parseInt(req.body.stock)
+
+    if(req.body.position == ""){
+        const countProducts = await Product.countDocuments({})
+        req.body.position = countProducts + 1
+    }else{
+        req.body.position = parseInt(req.body.position)
+    }
+    
+    //Tạo mới 1 sản phẩm với data lấy từ "req.body"
+    const product = new Product(req.body)
+    //Lưu sản phẩm vào database
+    await product.save()
+
+    res.redirect(`${systemConfig.prefixAdmin}/products`)
 }
