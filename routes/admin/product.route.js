@@ -13,7 +13,10 @@ router.patch('/change-multi', controller.changeMulti) //Gửi dữ liệu status
 
 router.delete('/delete/:id', controller.deleteItem)    
 
-router.get('/create', controller.create)
+//Tại mới sản phẩm
+router.get('/create', controller.create) //Lúc bấm +Thêm mới thì nó chạy vào router này [GET]
+
+router.post('/create', controller.createPost)// Khi submit cái form lên server thì nó chạy vào router này [POST]
 
 //Thùng rác
 router.get("/trash", controller.trash)

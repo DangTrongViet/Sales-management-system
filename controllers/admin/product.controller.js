@@ -143,9 +143,15 @@ module.exports.requireTrash = async (req, res)=>{
 }
 
 //---------------------------------------------------------------------
-//5. [GET] "/admin/products/create" Tạo mới 1 sản phẩm
+//5. 
+// [GET] "/admin/products/create" Tạo mới 1 sản phẩm
 module.exports.create = async (req, res)=>{
     res.render("admin/pages/products/create.pug", {
         pageTitle: "Thêm mới sản phẩm"
     })
+}
+
+// [POST] "/admin/products/create" 
+module.exports.createPost = async (req, res)=>{
+    res.send("oke")
 }
