@@ -27,7 +27,7 @@ if(buttonChangeStatus.length > 0){
 }
 
 //----------------------------------------------------------------------
-//Xóa sản phẩm
+//Xóa 1 sản phẩm
 const buttonDelete = document.querySelectorAll("[button-delete]")
 
 if(buttonDelete.length > 0){
