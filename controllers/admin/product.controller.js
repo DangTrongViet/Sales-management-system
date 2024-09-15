@@ -3,6 +3,7 @@ const filterStatusHelper = require("../../helpers/filterStatus.js")
 const searchHelper = require("../../helpers/search.js")
 const paginationHelper = require("../../helpers/pagination.js")
 const systemConfig = require("../../config/system.js")
+
 //1. [GET] /admin/products
 module.exports.index = async (req, res)=>{
     //1. Xử lý lọc sản phẩm
@@ -154,6 +155,7 @@ module.exports.create = async (req, res)=>{
 
 // [POST] "/admin/products/create" (router để gửi in4 sản phẩm lên server)
 module.exports.createPost = async (req, res)=>{
+    console.log(req.file)
     req.body.price = parseInt(req.body.price)
     req.body.discountPercentage = parseInt(req.body.discountPercentage)
     req.body.stock = parseInt(req.body.stock)
@@ -164,7 +166,9 @@ module.exports.createPost = async (req, res)=>{
     }else{
         req.body.position = parseInt(req.body.position)
     }
-    
+
+    req.body.thumbnail = `/uploads/${req.file.filename}`
+
     //Tạo mới 1 sản phẩm với data lấy từ "req.body"
     const product = new Product(req.body)
     //Lưu sản phẩm vào database

@@ -1,6 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
+const storageMulter = require("../../helpers/storageMulter")
+const multer  = require('multer'); //Thư viện để upload ảnh
+const upload = multer({ storage: storageMulter() }) //Để public và chứa all file mình muốn upload
+
 const controller = require("../../controllers/admin/product.controller.js")
 
 router.get('/', controller.index) //gửi chuỗi này về file index.route.js và nó sẽ lấy: chuỗi bên đó + chuỗi bên này gửi qua
@@ -15,11 +19,16 @@ router.delete('/delete/:id', controller.deleteItem)
 //Tại mới sản phẩm (tách ra 2 router: get (để render ra giao diện), post (để gửi in4 sản phẩm lên server))
 router.get('/create', controller.create) //Lúc bấm +Thêm mới thì nó chạy vào router này [GET]
 
-router.post('/create', controller.createPost)// Khi submit (Tạo mới) cái form lên server thì nó chạy vào router này [POST]
+router.post(
+    '/create', 
+    upload.single('thumbnail'), 
+    controller.createPost
+)// Khi submit (Tạo mới) cái form lên server thì nó chạy vào router này [POST]
 
 //Thùng rác
 router.get("/trash", controller.trash)
 
 router.patch('/trash/:require/:id', controller.requireTrash);
 
+//export
 module.exports = router
