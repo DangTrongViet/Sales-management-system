@@ -10,7 +10,6 @@ router.patch('/change-status/:status/:id', controller.changeStatus)//Node ký hi
                                                                    // ta nhận giá trị như status và id từ: req.params
 router.patch('/change-multi', controller.changeMulti) //Gửi dữ liệu status và id qua body của request, không phải qua URL. Điều này thường được dùng khi dữ liệu cần truyền phức tạp hoặc có nhiều giá trị
                                                       //ta nhận giá trị như status và id từ: req.body
-
 router.delete('/delete/:id', controller.deleteItem)    
 
 //Tại mới sản phẩm (tách ra 2 router: get (để render ra giao diện), post (để gửi in4 sản phẩm lên server))

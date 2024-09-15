@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
-const flash = require('express-flash');
+const flash = require('express-flash');//Thư viện in ra thông báo
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const methodOverride = require('method-override');
+const multer  = require('multer'); //Thư viện để upload ảnh
 
 
 // Tải biến môi trường
