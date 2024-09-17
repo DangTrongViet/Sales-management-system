@@ -89,7 +89,7 @@ if(checkboxMulti){
 //---------------------------------------------------------------------
 // Form Change Multi (Thay đổi trạng thái của nhiều sản phẩm)
 const formChangeMulti = document.querySelector("[form-change-multi]")
-console.log(formChangeMulti)
+
 if(formChangeMulti){
     formChangeMulti.addEventListener("submit", (event)=>{
         event.preventDefault();
@@ -188,8 +188,28 @@ if(formTrashItem){
 //---------------------------------------------------------------------
 //Upload Image and preview (Tải ảnh lên và có thể xem trước được nội dung ảnh)
 const uploadImage = document.querySelector("[upload-image]")
-const uploadImageInput = document.querySelector("[upload-image-input]")
 
 if(uploadImage){
-    
+    const uploadImageInput = document.querySelector("[upload-image-input]")
+    const uploadImagePreview = document.querySelector("[upload-image-preview]")
+    const closeButton = document.querySelector("[close-button]")
+
+    uploadImageInput.addEventListener("change", (event)=>{
+        //console.log(event)
+        const file = event.target.files[0]
+        if (file){
+            uploadImagePreview.src = URL.createObjectURL(file)//Được sử dụng để tạo một URL tạm thời, đại diện cho một đối tượng file hoặc blob. URL này có thể được sử dụng để tham chiếu trực tiếp đến tệp mà người dùng đã chọn mà không cần tải tệp đó lên máy chủ.
+            uploadImagePreview.classList.remove("hidden");
+        }
+
+        //close image
+        if(closeButton){
+            closeButton.addEventListener("click", ()=>{
+                uploadImageInput.value = ""
+                uploadImagePreview.src = ""
+                uploadImagePreview.classList.add("hidden");
+            })
+        }
+    })
 }
+
