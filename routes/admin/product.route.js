@@ -3,7 +3,7 @@ const router = express.Router()
 
 const storageMulter = require("../../helpers/storageMulter")
 const multer  = require('multer'); //Thư viện để upload ảnh
-const upload = multer({ storage: storageMulter() }) //Để public và chứa all file mình muốn upload
+const upload = multer({ storage: storageMulter()}) //Truyền vào giá trị trả về của hàm storageMulter() để multer biết cách xử lý file upload (lưu ở đâu, tên file như thế nào).
 
 const controller = require("../../controllers/admin/product.controller.js")
 
@@ -21,7 +21,7 @@ router.get('/create', controller.create) //Lúc bấm +Thêm mới thì nó ch�
 
 router.post(
     '/create', 
-    upload.single('thumbnail'), 
+    upload.single('thumbnail'),  //Middleware để xử lý một file upload từ form HTML có trường thumbnail
     controller.createPost
 )// Khi submit (Tạo mới) cái form lên server thì nó chạy vào router này [POST]
 

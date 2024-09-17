@@ -1,3 +1,4 @@
+//Ta tạo thiết lập nơi lưu ảnh và đặt tên cho ảnh
 const multer  = require('multer'); 
 module.exports = ()=>{
     const storage = multer.diskStorage({
