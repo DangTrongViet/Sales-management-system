@@ -182,7 +182,6 @@ if(formTrashItem){
     closeAlert.addEventListener("click", ()=>{
         showAlert.classList.add("alert-hidden")
     })
-
  }
 
 //---------------------------------------------------------------------
