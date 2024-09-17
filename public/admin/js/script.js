@@ -185,3 +185,11 @@ if(formTrashItem){
 
  }
 
+//---------------------------------------------------------------------
+//Upload Image and preview (Tải ảnh lên và có thể xem trước được nội dung ảnh)
+const uploadImage = document.querySelector("[upload-image]")
+const uploadImageInput = document.querySelector("[upload-image-input]")
+
+if(uploadImage){
+    
+}
