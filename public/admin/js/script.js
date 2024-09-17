@@ -200,14 +200,16 @@ if(uploadImage){
         if (file){
             uploadImagePreview.src = URL.createObjectURL(file)//Được sử dụng để tạo một URL tạm thời, đại diện cho một đối tượng file hoặc blob. URL này có thể được sử dụng để tham chiếu trực tiếp đến tệp mà người dùng đã chọn mà không cần tải tệp đó lên máy chủ.
             uploadImagePreview.classList.remove("hidden");
+            closeButton.classList.remove("hidden")
         }
 
         //close image
         if(closeButton){
             closeButton.addEventListener("click", ()=>{
-                uploadImageInput.value = ""
-                uploadImagePreview.src = ""
+                uploadImageInput.value = "";
+                uploadImagePreview.src = "";
                 uploadImagePreview.classList.add("hidden");
+                closeButton.classList.add("hidden")
             })
         }
     })
