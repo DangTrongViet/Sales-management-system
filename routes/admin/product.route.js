@@ -7,6 +7,8 @@ const upload = multer({ storage: storageMulter()}) //Truyền vào giá trị tr
 
 const controller = require("../../controllers/admin/product.controller.js")
 
+const validate = require("../../validate/admin/product.validate.js")
+
 router.get('/', controller.index) //gửi chuỗi này về file index.route.js và nó sẽ lấy: chuỗi bên đó + chuỗi bên này gửi qua
 
 router.patch('/change-status/:status/:id', controller.changeStatus)//Node ký hiệu ":" để truyền data động, tức ta nhập gì trên url nso sẽ lấy cái status và gán vào status này. id cũng vậy
@@ -22,7 +24,8 @@ router.get('/create', controller.create) //Lúc bấm +Thêm mới thì nó ch�
 router.post(
     '/create', 
     upload.single('thumbnail'),  //Middleware để xử lý một file upload từ form HTML có trường thumbnail
-    controller.createPost
+    validate.createPost,//Middleware được dùng để kiểm tra và xử lý các điều kiện trước khi request đến controller chính là: controller.createPost
+    controller.createPost //controller chính. Nó chỉ được gọi khi tất cả các middleware trước đó đã hoàn thành và không có lỗi.
 )// Khi submit (Tạo mới) cái form lên server thì nó chạy vào router này [POST]
 
 //Thùng rác

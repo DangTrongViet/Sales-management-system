@@ -156,16 +156,7 @@ module.exports.create = async (req, res)=>{
 // [POST] "/admin/products/create" (router để gửi in4 sản phẩm lên server)
 module.exports.createPost = async (req, res)=>{
     console.log(req.file)
-    if(!req.body.title){
-        req.flash('error', 'Vui lòng nhập sản phẩm!');
-        res.redirect("back")
-        return;
-    }
-    if(!req.body.title.length < 8){
-        req.flash('error', 'Vui lòng nhập ít nhất 8 lý tự!');
-        res.redirect("back")
-        return;
-    }
+
     req.body.price = parseInt(req.body.price)
     req.body.discountPercentage = parseInt(req.body.discountPercentage)
     req.body.stock = parseInt(req.body.stock)
