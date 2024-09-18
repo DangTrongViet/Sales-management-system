@@ -10,6 +10,5 @@ module.exports = (query) => {
         const regex = new RegExp(objectSearch.keyword, "i"); // Tìm kiếm tương đối theo tên sản phẩm
         objectSearch.regex = regex;
     }
-
     return objectSearch;
 };
