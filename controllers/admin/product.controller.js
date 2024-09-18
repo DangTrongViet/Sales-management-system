@@ -179,3 +179,49 @@ module.exports.createPost = async (req, res)=>{
 
     res.redirect(`${systemConfig.prefixAdmin}/products`)
 }
+
+//---------------------------------------------------------------------
+//5. Chỉnh sửa sản phẩm
+//[GET] /admin/products/edit/:id
+module.exports.edit = async (req, res) => {
+    try {
+      const find = {
+        deleted: false,
+        _id: req.params.id
+      };
+  
+      const product = await Product.findOne(find);
+  
+      res.render('admin/pages/products/edit', {
+        pageTitle: 'Chỉnh sửa sản phẩm',
+        product: product
+      });
+    } catch (error) {
+      res.redirect(`${systemConfig.prefixAdmin}/products`);
+    }
+  };
+  
+//[PATCH] /admin/products/edit/:id
+module.exports.editPatch = async (req, res)=>{
+    console.log(req.body)
+    const productId = req.body.id;
+    //Đang tới đây , giờ cập nhập dư xlieuej vào update vào database
+    const updateData = {
+        title: req.body.title,
+        description: req.body.description,
+        price: req.body.price,
+        discountPercentage: req.body.discountPercentage,
+        stock: req.body.stock,
+        position: req.body.position,
+        status: req.body.status,
+        };
+
+    // Kiểm tra nếu có file ảnh mới được upload
+    if (req.file) {
+        updateData.thumbnail = `/uploads/${req.file.filename}`; // Đường dẫn ảnh mới
+    }
+    // Cập nhật sản phẩm
+    await Product.findByIdAndUpdate(productId, updateData);
+  
+    res.send("oke")
+}

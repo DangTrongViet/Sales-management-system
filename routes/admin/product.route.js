@@ -28,6 +28,14 @@ router.post(
     controller.createPost //controller chính. Nó chỉ được gọi khi tất cả các middleware trước đó đã hoàn thành và không có lỗi.
 )// Khi submit (Tạo mới) cái form lên server thì nó chạy vào router này [POST]
 
+//Sửa sản phẩm
+router.get('/edit/:id', controller.edit)
+router.patch('/edit/:id',
+    upload.single('thumbnail'),
+    validate.createPost,
+    controller.editPatch
+)
+
 //Thùng rác
 router.get("/trash", controller.trash)
 
