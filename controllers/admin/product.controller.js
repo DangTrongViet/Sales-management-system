@@ -191,7 +191,7 @@ module.exports.edit = async (req, res) => {
       };
   
       const product = await Product.findOne(find);
-  
+      
       res.render('admin/pages/products/edit', {
         pageTitle: 'Chỉnh sửa sản phẩm',
         product: product
@@ -205,23 +205,21 @@ module.exports.edit = async (req, res) => {
 module.exports.editPatch = async (req, res)=>{
     const productId = req.params.id;
 
-    const updateData = {
-        title: req.body.title,
-        description: req.body.description,
-        price: parseInt(req.body.price),
-        discountPercentage: parseInt(req.body.discountPercentage),
-        stock: parseInt(req.body.stock),
-        status: req.body.status,
-        position: parseInt(req.body.position),
-    };
+    req.body.price = parseInt(req.body.price),
+    req.body.discountPercentage = parseInt(req.body.discountPercentage),
+    req.body.stock = parseInt(req.body.stock),
+    req.body.position = parseInt(req.body.position)
 
     // Kiểm tra nếu có file ảnh mới được upload
     if (req.file) {
-        updateData.thumbnail = `/uploads/${req.file.filename}`; // Đường dẫn ảnh mới
+        req.body.thumbnail = `/uploads/${req.file.filename}`; // Đường dẫn ảnh mới
     }
     // Cập nhật sản phẩm
-    await Product.findByIdAndUpdate(productId, updateData);
-    
-    req.flash('success', 'Cập nhập thành công');
+    try {
+        await Product.updateOne({_id: productId}, req.body);
+        req.flash('success', 'Cập nhập thành công');
+    } catch (error){
+        req.flash('error', 'Lỗi cập nhập!');
+    }
     res.redirect(`${systemConfig.prefixAdmin}/products`)
 }
