@@ -215,11 +215,7 @@ module.exports.editPatch = async (req, res)=>{
         req.body.thumbnail = `/uploads/${req.file.filename}`; // Đường dẫn ảnh mới
     }
     // Cập nhật sản phẩm
-    try {
-        await Product.updateOne({_id: productId}, req.body);
-        req.flash('success', 'Cập nhập thành công');
-    } catch (error){
-        req.flash('error', 'Lỗi cập nhập!');
-    }
+    await Product.updateOne({_id: productId}, req.body);
+    req.flash('success', 'Cập nhập thành công');
     res.redirect(`${systemConfig.prefixAdmin}/products`)
 }
