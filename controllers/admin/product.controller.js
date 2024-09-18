@@ -203,18 +203,17 @@ module.exports.edit = async (req, res) => {
   
 //[PATCH] /admin/products/edit/:id
 module.exports.editPatch = async (req, res)=>{
-    console.log(req.body)
-    const productId = req.body.id;
-    //Đang tới đây , giờ cập nhập dư xlieuej vào update vào database
+    const productId = req.params.id;
+
     const updateData = {
         title: req.body.title,
         description: req.body.description,
-        price: req.body.price,
-        discountPercentage: req.body.discountPercentage,
-        stock: req.body.stock,
-        position: req.body.position,
+        price: parseInt(req.body.price),
+        discountPercentage: parseInt(req.body.discountPercentage),
+        stock: parseInt(req.body.stock),
         status: req.body.status,
-        };
+        position: parseInt(req.body.position),
+    };
 
     // Kiểm tra nếu có file ảnh mới được upload
     if (req.file) {
@@ -222,6 +221,7 @@ module.exports.editPatch = async (req, res)=>{
     }
     // Cập nhật sản phẩm
     await Product.findByIdAndUpdate(productId, updateData);
-  
-    res.send("oke")
+    
+    req.flash('success', 'Cập nhập thành công');
+    res.redirect(`${systemConfig.prefixAdmin}/products`)
 }
