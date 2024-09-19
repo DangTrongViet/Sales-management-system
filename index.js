@@ -29,6 +29,7 @@ app.set('views', './views');
 app.set('view engine', 'pug');
 
 // Static files: thiết lập folder public là file tĩnh để công khai ra bên ngoài
+console.log(__dirname)
 app.use(express.static('public'));
 
 // Middleware để xử lý dữ liệu URL-encoded từ các form HTML
