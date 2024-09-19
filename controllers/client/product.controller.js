@@ -1,5 +1,6 @@
 const Product = require("../../models/product.model.js")
 
+//1. Hiển thị trang client
 module.exports.index = async (req, res)=>{
     const products = await Product.find({//Lọc data muốn lấy ra
         status: "active",
@@ -15,4 +16,9 @@ module.exports.index = async (req, res)=>{
         pageTitle: "Danh sách sản phẩm",
         products: newProducts
     })
+}
+
+//2. Hiển thị chi tiết sản phẩm
+module.exports.detail = async (req, res)=>{
+    res.send("oke")
 }
