@@ -87,7 +87,13 @@ block main
                     button-change-status
                     class="badge badge-danger"
                     ) Ngừng hoạt động
-              td 
+              td
+                a(
+                  href=`${prefixAdmin}/products/detail/${item.id}`
+                  class="btn btn-secondary btn-sm"
+                  data-id = item.id
+                  ) Chi tiết
+
                 a(
                   href=`${prefixAdmin}/products/edit/${item.id}`
                   class="btn btn-warning btn-sm"

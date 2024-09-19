@@ -36,6 +36,9 @@ router.patch('/edit/:id',
     controller.editPatch
 )
 
+//Chi tiết sản phẩm detail
+router.get('/detail/:id', controller.detail)
+
 //Thùng rác
 router.get("/trash", controller.trash)
 
