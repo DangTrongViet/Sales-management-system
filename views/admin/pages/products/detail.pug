@@ -34,6 +34,11 @@ block main
         if(product.description)
           div(class="description") #{product.description}
 
+        a(
+          href=`${prefixAdmin}/products/edit/${product._id}`
+          class="btn btn-warning"
+        ) Chỉnh sửa
+
       .product-image
         if(product.thumbnail)
           img(src=product.thumbnail class="img-thumbnail" alt=product.title)
