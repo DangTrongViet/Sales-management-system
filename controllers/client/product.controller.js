@@ -11,7 +11,7 @@ module.exports.index = async (req, res)=>{
         item.priceNew = (item.price - item.price * item.discountPercentage * 0.01).toFixed(0)//Thêm 1 thuộc tính priceNew cho mảng products
         return item;
     })
-    console.log(products)
+    // console.log(products)
     res.render("client/pages/products/index.pug", {
         pageTitle: "Danh sách sản phẩm",
         products: newProducts
@@ -19,6 +19,22 @@ module.exports.index = async (req, res)=>{
 }
 
 //2. Hiển thị chi tiết sản phẩm
-module.exports.detail = async (req, res)=>{
-    res.send("oke")
-}
+module.exports.detail = async (req, res) => {
+    try {
+        const find = {
+            deleted: false, 
+            slug: req.params.slug,
+            status: "active"
+        };
+        const product = await Product.findOne(find);
+
+        res.render("client/pages/products/detail", {
+            pageTitle: product.title, 
+            product: product, 
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.redirect(`/products`);
+    }
+};

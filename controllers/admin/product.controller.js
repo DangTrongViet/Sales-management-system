@@ -61,7 +61,6 @@ module.exports.changeStatus = async (req, res) =>{
 
 //2. [PATCH] /admin/products/change-multi/:status/:id  (Thay đổi trạng thái hoạt động/dừng hoạt động/xóa sản phẩm/ Thay đổi vị trí) -> của nhiều sản phẩm
 module.exports.changeMulti = async (req, res) =>{
-    console.log(req.body)
     let type = req.body.type
     let ids = (req.body.ids).split(",")
 
@@ -120,7 +119,7 @@ module.exports.deleteItem = async (req, res)=>{
 // [PATCH] /admin/products/trash (router nay để render thùng rác ra giao diện)
 module.exports.trash = async (req, res)=>{
     const deletedProducts = await Product.find({deleted: true})
-    console.log(deletedProducts)
+    // console.log(deletedProducts)
     res.render("admin/pages/products/trash.pug", {
         pageTitle: "Danh sách sản phẩm bị xóa",
         deletedProducts: deletedProducts || []
@@ -155,7 +154,7 @@ module.exports.create = async (req, res)=>{
 
 // [POST] "/admin/products/create" (router để gửi in4 sản phẩm lên server)
 module.exports.createPost = async (req, res)=>{
-    console.log(req.file)
+    // console.log(req.file)
 
     req.body.price = parseInt(req.body.price)
     req.body.discountPercentage = parseInt(req.body.discountPercentage)
