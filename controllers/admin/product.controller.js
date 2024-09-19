@@ -233,14 +233,13 @@ module.exports.detail = async (req, res)=>{
             _id: req.params.id
         };
 
-        const product = await Product.findOne(find);
-        console.log(product)
-        
-        res.render('admin/pages/products/detail', {
-            pageTitle: product.title,
-            product: product
-        });
-        } catch (error) {
-            res.redirect(`${systemConfig.prefixAdmin}/products`);
-        }
+    const product = await Product.findOne(find);
+    
+    res.render('admin/pages/products/detail', {
+        pageTitle: product.title,
+        product: product
+    });
+    } catch (error) {
+        res.redirect(`${systemConfig.prefixAdmin}/products`);
+    }
 }
