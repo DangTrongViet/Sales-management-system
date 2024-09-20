@@ -30,7 +30,7 @@ app.set('view engine', 'pug');
 
 // Static files: thiết lập folder public là file tĩnh để công khai ra bên ngoài
 console.log(__dirname)
-app.use(express.static(`${__dirname}/public`)); //__dirname: chính cấu trúc thư mục chứa tất cả các mục trong đồ án (do trên online nó k hiểu public là gì nên ta phải thêm __dirname vào)
+app.use(express.static(`${__dirname}/public`)); //__dirname: chính là "E:\Back-end\product-management" (do trên online nó k hiểu public là gì nên ta phải thêm __dirname vào)
 
 // Middleware để xử lý dữ liệu URL-encoded từ các form HTML
 app.use(bodyParser.urlencoded({ extended: false }));

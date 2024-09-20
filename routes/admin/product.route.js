@@ -1,9 +1,22 @@
 const express = require('express')
 const router = express.Router()
 
-const storageMulter = require("../../helpers/storageMulter")
+//------------------------------------------------------------------------
+// const storageMulter = require("../../helpers/storageMulter")
 const multer  = require('multer'); //Thư viện để upload ảnh
-const upload = multer({ storage: storageMulter()}) //Truyền vào giá trị trả về của hàm storageMulter() để multer biết cách xử lý file upload (lưu ở đâu, tên file như thế nào).
+const cloudinary = require('cloudinary').v2
+const streamifier = require('streamifier')
+
+
+// Configuration
+cloudinary.config({ 
+    cloud_name: 'dpfnbbiq4', 
+    api_key: '821816283773499', 
+    api_secret: 'ibzKHBXf78NFOnYdOV1Q6325c-Q' // Click 'View API Keys' above to copy your API secret
+});
+
+const upload = multer() //Truyền vào giá trị trả về của hàm storageMulter() để multer biết cách xử lý file upload (lưu ở đâu, tên file như thế nào).
+//------------------------------------------------------------------------
 
 const controller = require("../../controllers/admin/product.controller.js")
 
@@ -24,6 +37,31 @@ router.get('/create', controller.create) //Lúc bấm +Thêm mới thì nó ch�
 router.post(
     '/create', 
     upload.single('thumbnail'),  //Middleware để xử lý một file upload từ form HTML có trường thumbnail
+    function (req, res, next) {
+        let streamUpload = (req) => {
+            return new Promise((resolve, reject) => {
+                let stream = cloudinary.uploader.upload_stream(
+                  (error, result) => {
+                    if (result) {
+                      resolve(result);
+                    } else {
+                      reject(error);
+                    }
+                  }
+                );
+    
+              streamifier.createReadStream(req.file.buffer).pipe(stream);
+            });
+        };
+    
+        async function upload(req) {
+            let result = await streamUpload(req);
+            console.log(result);
+        }
+    
+        upload(req);
+        
+    },
     validate.createPost,//Middleware được dùng để kiểm tra và xử lý các điều kiện trước khi request đến controller chính là: controller.createPost
     controller.createPost //controller chính. Nó chỉ được gọi khi tất cả các middleware trước đó đã hoàn thành và không có lỗi.
 )// Khi submit (Tạo mới) cái form lên server thì nó chạy vào router này [POST]
@@ -46,3 +84,4 @@ router.patch('/trash/:require/:id', controller.requireTrash);
 
 //export
 module.exports = router
+
