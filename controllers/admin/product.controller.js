@@ -154,7 +154,7 @@ module.exports.create = async (req, res)=>{
 
 // [POST] "/admin/products/create" (router để gửi in4 sản phẩm lên server)
 module.exports.createPost = async (req, res)=>{
-    // console.log(req.file)
+     console.log(req.file)
 
     req.body.price = parseInt(req.body.price)
     req.body.discountPercentage = parseInt(req.body.discountPercentage)
@@ -167,10 +167,6 @@ module.exports.createPost = async (req, res)=>{
         req.body.position = parseInt(req.body.position)
     }
     
-    // if(req.file){
-    //     req.body.thumbnail = `/uploads/${req.file.filename}`
-    // }
-
     //Tạo mới 1 sản phẩm với data lấy từ "req.body"
     const product = new Product(req.body)
     //Lưu sản phẩm vào database
@@ -210,9 +206,9 @@ module.exports.editPatch = async (req, res)=>{
     req.body.position = parseInt(req.body.position)
 
     // Kiểm tra nếu có file ảnh mới được upload
-    if (req.file) {
-        req.body.thumbnail = `/uploads/${req.file.filename}`; // Đường dẫn ảnh mới
-    }
+    // if (req.file) {
+    //     req.body.thumbnail = `/uploads/${req.file.filename}`; // Đường dẫn ảnh mới
+    // }
     // Cập nhật sản phẩm
     try {
         await Product.updateOne({_id: productId}, req.body);

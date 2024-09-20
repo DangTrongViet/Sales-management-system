@@ -7,8 +7,8 @@ const multer  = require('multer'); //Thư viện để upload ảnh
 const upload = multer() //Truyền vào giá trị trả về của hàm storageMulter() để multer biết cách xử lý file upload (lưu ở đâu, tên file như thế nào).
 
 const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware.js")
-//------------------------------------------------------------------------
 
+//------------------------------------------------------------------------
 const controller = require("../../controllers/admin/product.controller.js")
 
 const validate = require("../../validate/admin/product.validate.js")
