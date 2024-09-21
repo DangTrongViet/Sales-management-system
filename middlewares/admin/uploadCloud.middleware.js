@@ -1,7 +1,6 @@
 const cloudinary = require('cloudinary').v2
 const streamifier = require('streamifier')
 
-
 // Tài khoản mà sẽ upload ảnh lên
 cloudinary.config({ 
     cloud_name: process.env.CLOUD_NAME, 
@@ -9,6 +8,7 @@ cloudinary.config({
     api_secret: process.env.CLOUD_SECRET // Click 'View API Keys' above to copy your API secret
 });
 
+//Xử lý đẩy ảnh lên cloud
 module.exports.upload = (req, res, next)=>{
     if(req.file){
         let streamUpload = (req) => {
@@ -28,9 +28,7 @@ module.exports.upload = (req, res, next)=>{
       };
       async function upload(req) {
         let result = await streamUpload(req);
-        console.log(result.url);
         req.body[req.file.fieldname] = result.url
-        console.log("o dây:",req.body)
         next();
       }
 

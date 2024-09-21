@@ -214,3 +214,34 @@ if(uploadImage){
     })
 }
 
+//----------------------------------------------------------------------
+//Xắp xếp sản phẩm
+//a. sắp xếp theo vị trí
+
+const sort = document.querySelector("[sort]")
+
+if(sort){
+    const sortSelect = document.querySelectorAll("[sort-select]")
+    const sortClear = document.querySelector("[sort-clear]")
+
+    sortSelect.forEach(option=>{
+        let url = new URL(window.location.href)
+        option.addEventListener("change", (e)=>{
+            const value = e.target.value.split("-");
+            const sortKey = value[0];
+            const sortValue = value[1];
+
+            url.searchParams.set("sortKey", sortKey)
+            url.searchParams.set("sortValue", sortValue)
+
+            window.location.href = url.href
+        })
+    })
+
+    sortClear.addEventListener("click", ()=>{
+        let url = new URL(window.location.href);
+        url.searchParams.delete("sortKey");
+        url.searchParams.delete("sortValue");
+        window.location.href = url.href
+    })
+}

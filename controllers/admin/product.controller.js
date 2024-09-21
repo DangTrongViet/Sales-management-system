@@ -238,3 +238,6 @@ module.exports.detail = async (req, res)=>{
         res.redirect(`${systemConfig.prefixAdmin}/products`);
     }
 }
+
+//---------------------------------------------------------------------
+//7. Sắp xếp sản phẩm theo các tiêu chí
