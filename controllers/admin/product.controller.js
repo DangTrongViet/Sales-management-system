@@ -248,4 +248,3 @@ module.exports.detail = async (req, res)=>{
 }
 
 //---------------------------------------------------------------------
-//7. Sắp xếp sản phẩm theo các tiêu chí
