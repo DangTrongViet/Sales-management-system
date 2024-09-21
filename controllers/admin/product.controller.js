@@ -31,9 +31,17 @@ module.exports.index = async (req, res)=>{
         limitItem: 4
     }, req.query, countProducts)
 
+    //4. Xử lý sắp xếp sản phẩm theo các tiêu chí
+    let sort = {}
+    if(req.query.sortKey && req.query.sortValue){
+        sort[req.query.sortKey] = req.query.sortValue
+    }else{
+        sort.position = "desc"
+    }
+
     //Render ra giao diện
     const products = await Product.find(find)
-                                  .sort({position: "desc"})//Sắp xếp giảm gần
+                                  .sort(sort)
                                   .limit(objectPagination.limitItem)
                                   .skip(objectPagination.skip) //limit: giới hạn SL sản phẩm mỗi trang, skip: số sản phẩm bỏ qua 
 
