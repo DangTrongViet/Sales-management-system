@@ -221,27 +221,32 @@ if(uploadImage){
 const sort = document.querySelector("[sort]")
 
 if(sort){
-    const sortSelect = document.querySelectorAll("[sort-select]")
+    const sortSelect = document.querySelector("[sort-select]")
     const sortClear = document.querySelector("[sort-clear]")
+    let url = new URL(window.location.href)
+    
+    sortSelect.addEventListener("change", (e)=>{
+        const [sortKey, sortValue] = e.target.value.split("-");
 
-    sortSelect.forEach(option=>{
-        let url = new URL(window.location.href)
-        option.addEventListener("change", (e)=>{
-            const value = e.target.value.split("-");
-            const sortKey = value[0];
-            const sortValue = value[1];
+        url.searchParams.set("sortKey", sortKey)
+        url.searchParams.set("sortValue", sortValue)
 
-            url.searchParams.set("sortKey", sortKey)
-            url.searchParams.set("sortValue", sortValue)
-
-            window.location.href = url.href
-        })
+        window.location.href = url.href
     })
 
     sortClear.addEventListener("click", ()=>{
-        let url = new URL(window.location.href);
         url.searchParams.delete("sortKey");
         url.searchParams.delete("sortValue");
         window.location.href = url.href
     })
+
+    //Thêm selected=true cho option
+    const sortKey = url.searchParams.get("sortKey")
+    const sortValue = url.searchParams.get("sortValue")
+
+    if(sortKey && sortValue){
+        const stringSort = `${sortKey}-${sortValue}`
+        const optionSelected = sortSelect.querySelector(`option[value='${stringSort}']`)
+        optionSelected.selected = true
+    }
 }
