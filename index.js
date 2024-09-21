@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const methodOverride = require('method-override');
-
+var path = require('path');
 
 // Tải biến môi trường
 require('dotenv').config();
@@ -50,6 +50,12 @@ app.use(session({
   cookie: { maxAge: 60000 } // Thay đổi thời gian lưu cookie nếu cần
 }));
 app.use(flash());
+
+//TinyMCE
+app.use(
+  '/tinymce', 
+  express.static(path.join(__dirname, 'node_modules', 'tinymce')
+));
 
 // Định nghĩa các route
 routeAdmin(app);
