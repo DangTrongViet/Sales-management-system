@@ -6,7 +6,7 @@ const upload = multer()
 
 const controller = require("../../controllers/admin/product-category.controller")
 const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware.js")
-const validate = require("../../validate/admin/product.validate.js")
+const validate = require("../../validate/admin/product-category.validate.js")
 
 //Tranh chủ
 router.get('/', controller.index)
@@ -19,5 +19,4 @@ router.post('/create',
     validate.createPost,
     controller.createPost)
     
-
 module.exports = router
