@@ -1,4 +1,4 @@
-const Product = require("../../models/product.model.js")
+const ProductCategory = require("../../models/product-category.model")
 
 //1. [GET] /admin/products-category
 module.exports.index = async (req, res)=>{
@@ -17,5 +17,9 @@ module.exports.create = async (req, res)=>{
 
 //[POST] /admin/products-category/create
 module.exports.createPost = async (req, res)=>{
-    res.send("oke")
+    console.log(req.body)
+
+    const product = new ProductCategory(req.body)
+    product.save()
+    res.redirect("back")
 }
