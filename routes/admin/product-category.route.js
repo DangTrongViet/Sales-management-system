@@ -18,5 +18,21 @@ router.post('/create',
     uploadCloud.upload,
     validate.createPost,
     controller.createPost)
+
+
+//Chỉnh sửa sản phẩm
+router.get('/edit/:id', controller.edit) 
+
+router.patch('/edit/:id', 
+    upload.single('thumbnail'),
+    uploadCloud.upload,
+    validate.createPost,
+    controller.editPatch) 
+
+//Chi tiết sản phẩm
+router.get('/detail/:id', controller.detail)
+
+//Xóa sản phẩm
+router.delete('/delete/:id', controller.deleteItem) 
     
 module.exports = router
