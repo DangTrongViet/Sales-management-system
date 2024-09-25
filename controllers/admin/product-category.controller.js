@@ -35,13 +35,13 @@ module.exports.create = async (req, res)=>{
         });
         return tree;
     }
-    const records = await ProductCategory.find(find)
-    const newRecords = createTree(records)
+    let records = await ProductCategory.find(find)
+    records = createTree(records)
     //console.log(newRecords)
 
     res.render("admin/pages/products-category/create.pug", {
         pageTitle: "Danh mục sản phẩm",
-        newRecords: newRecords
+        records: records
     })
 }
 

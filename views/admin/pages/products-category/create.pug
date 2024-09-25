@@ -35,8 +35,8 @@ block main
         class="form-control"
       ) 
         option(value="") -- Chọn danh mục cha --
-        if(newRecords)
-          +select-tree(newRecords)
+        if(records)
+          +select-tree(records)
     
     div(class="form-group")
       label(for="desc") Mô tả
