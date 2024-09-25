@@ -37,11 +37,11 @@ module.exports.create = async (req, res)=>{
     }
     const records = await ProductCategory.find(find)
     const newRecords = createTree(records)
-    console.log(newRecords)
+    //console.log(newRecords)
 
     res.render("admin/pages/products-category/create.pug", {
         pageTitle: "Danh mục sản phẩm",
-        records: records
+        newRecords: newRecords
     })
 }
 
