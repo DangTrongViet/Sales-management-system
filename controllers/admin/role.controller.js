@@ -6,10 +6,15 @@ const Roles = require("../../models/role.model")
 // const systemConfig = require("../../config/system.js")
 // const createTreeHelper = require("../../helpers/createTree")
 
-
+//1. [GET] admin/roles
 module.exports.index = async (req, res)=>{
-    res.send("oke")
-    // res.render("admin/pages/roles/index.pug", {
-    //     pageTitle: "Nhóm quyền",
-    // })
+
+    const find = {
+        deleted: false
+    }
+    const records = await Roles.find(find)
+    res.render("admin/pages/roles/index.pug", {
+        pageTitle: "Nhóm quyền",
+        records: records
+    })
 }
