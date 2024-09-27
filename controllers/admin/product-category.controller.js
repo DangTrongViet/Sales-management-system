@@ -43,6 +43,7 @@ module.exports.createPost = async (req, res)=>{
 
     const records = new ProductCategory(req.body)
     await records.save()
+    req.flash('success', 'Tạo thành công!');
     res.redirect(`${systemConfig.prefixAdmin}/products-category`)
 }
 
@@ -53,11 +54,20 @@ module.exports.edit = async (req, res)=>{
         _id: req.params.id,
         deleted: false
     }
-    const product = await ProductCategory.findOne(find)
+    const product = await ProductCategory.findOne({
+        _id: req.params.id,
+        deleted: false
+    })
+
+    const records = await ProductCategory.find({
+        deleted: false
+    })
+    const newRecords = createTreeHelper.tree(records)
 
     res.render("admin/pages/products-category/edit.pug",{
         pageTitle: "Trang sửa sản phẩm",
-        product: product
+        product: product,
+        records: newRecords
     })
 }
 
