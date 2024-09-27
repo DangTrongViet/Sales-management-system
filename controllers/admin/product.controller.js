@@ -1,8 +1,10 @@
 const Product = require("../../models/product.model.js")
+const ProductCategory = require("../../models/product-category.model")
 const filterStatusHelper = require("../../helpers/filterStatus.js")
 const searchHelper = require("../../helpers/search.js")
 const paginationHelper = require("../../helpers/pagination.js")
 const systemConfig = require("../../config/system.js")
+const createTreeHelper = require("../../helpers/createTree")
 
 //1. [GET] /admin/products
 module.exports.index = async (req, res)=>{
@@ -155,8 +157,17 @@ module.exports.requireTrash = async (req, res)=>{
 //5. Tạo mới 1 sản phẩm
 // [GET] "/admin/products/create" (router để render ra giao diện)
 module.exports.create = async (req, res)=>{
+    let find = {
+        deleted: false
+    };
+    const category = await ProductCategory.find(find)
+    const newCategory = createTreeHelper.tree(category)
+    // //console.log(newCategory)
+    // console.log(category)
+
     res.render("admin/pages/products/create.pug", {
-        pageTitle: "Thêm mới sản phẩm"
+        pageTitle: "Thêm mới sản phẩm",
+        category: newCategory
     })
 }
 

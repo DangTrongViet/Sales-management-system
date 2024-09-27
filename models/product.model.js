@@ -7,6 +7,7 @@ mongoose.plugin(slug);
 const productSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
+    product_category_id: { type: String, default: "" },
     description: String,
     price: Number,
     discountPercentage: Number,
