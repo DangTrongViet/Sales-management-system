@@ -4,7 +4,7 @@ include ../../mixins/alert.pug
 block main 
   +alert-error("5000")
   +alert-success("5000")
-  h1(class="mb-4") Chỉnh sửa sản phẩm
+  h1(class="mb-4") Chỉnh sửa danh mục sản phẩm
 
   form(
     action=`${prefixAdmin}/products/edit/${product._id}?_method=PATCH`
@@ -30,7 +30,7 @@ block main
         id="desc"
         name="description"
         rows="5"
-      ) #{product.description}
+      ) !{product.description}
     
     div(class="form-group")
       label(for="price") Giá
