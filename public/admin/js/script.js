@@ -259,7 +259,7 @@ if(formDeletePermission){
     const buttonDeletePermissions = document.querySelector("[button-delete-permission]");
 
     buttonDeletePermissions.addEventListener("click", ()=>{
-        const inConfirm = confirm("Xóa sản phẩm")
+        const inConfirm = confirm("Xóa nhóm quyền")
             if(inConfirm){
                 const id = buttonDeletePermissions.getAttribute("data-id")
 
