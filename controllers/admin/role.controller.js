@@ -41,10 +41,37 @@ module.exports.createPost = async (req, res)=>{
 //3. Chi tiết, xóa, sửa
 //[GET] admin/roles/detail
 module.exports.detail = async (req, res)=>{
-    res.send("oke")
+    const find = {
+        _id: req.params.id,
+        deleted: false
+    }
+    const records = await Roles.findOne(find)
+    res.render("admin/pages/roles/detail.pug", {
+        pageTitle: "Chi tiết nhóm quyền",
+        records: records
+    })
 }
 
 //[GET] admin/roles/edit
 module.exports.edit = async (req, res)=>{
-    res.send("oke")
+    const find = {
+        _id: req.params.id,
+        deleted: false
+    }
+    const records = await Roles.findOne(find)
+    res.render("admin/pages/roles/edit.pug", {
+        pageTitle: "Sửa nhóm quyền",
+        records: records
+    })
+}
+
+//[PATCH] admin/roles/editPatch
+module.exports.editPatch = async (req, res)=>{
+    try {
+        await Roles.updateOne({_id: req.params.id}, req.body);
+        req.flash('success', 'Cập nhập thành công');
+    } catch (error){
+        req.flash('error', 'Lỗi cập nhập!');
+    }
+    res.redirect(`${systemConfig.prefixAdmin}/roles`)
 }
