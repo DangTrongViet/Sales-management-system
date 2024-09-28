@@ -2,10 +2,10 @@
 //Change status (Thay đổi trạng thái của 1 sản phẩm)
 const buttonChangeStatus = document.querySelectorAll("[button-change-status]")
 
-const formChangeStatus = document.querySelector("#form-change-status")
-const path = formChangeStatus.getAttribute("data-path")
-
 if(buttonChangeStatus.length > 0){
+    const formChangeStatus = document.querySelector("#form-change-status")
+    const path = formChangeStatus.getAttribute("data-path")
+
     buttonChangeStatus.forEach(button=>{
         button.addEventListener("click", (event)=>{
             event.preventDefault();

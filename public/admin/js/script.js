@@ -250,3 +250,24 @@ if(sort){
         optionSelected.selected = true
     }
 }
+
+//----------------------------------------------------------------------
+//Xóa 1 nhóm quyền
+const formDeletePermission = document.querySelector("#form-delete-permission")
+console.log(formDeletePermission)
+if(formDeletePermission){
+    const path = formDeletePermission.getAttribute("data-path")
+    const buttonDeletePermissions = document.querySelector("[button-delete-permission]");
+
+    buttonDeletePermissions.addEventListener("click", ()=>{
+        const inConfirm = confirm("Xóa sản phẩm")
+            if(inConfirm){
+                const id = buttonDeletePermissions.getAttribute("data-id")
+
+                const newPath = path + `/${id}?_method=DELETE`
+
+                formDeletePermission.action = newPath
+                formDeletePermission.submit()//Bản chất là nó gửi cái action lên server
+            }
+    })
+}

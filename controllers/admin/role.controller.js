@@ -75,3 +75,18 @@ module.exports.editPatch = async (req, res)=>{
     }
     res.redirect(`${systemConfig.prefixAdmin}/roles`)
 }
+
+//[DELETE] admin/roles/delete/:id
+module.exports.deletePermisson= async (req, res)=>{
+    const id = req.params.id
+
+    //Xóa mềm (thay đổi thuộc tính delete = true/false để hiển thị lên giao diện)
+    await Roles.updateOne({_id: id}, {
+        deleted: true
+    })
+
+    //Xóa cứng (xóa luôn trong database)
+    //await Product.deleteOne({_id: id})
+    req.flash('success', 'Sản phẩm đã được xóa!');
+    res.redirect('back')
+}
