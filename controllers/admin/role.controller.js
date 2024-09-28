@@ -37,3 +37,14 @@ module.exports.createPost = async (req, res)=>{
     await userRole.save()
     res.redirect(`${systemConfig.prefixAdmin}/roles`)
 }
+
+//3. Chi tiết, xóa, sửa
+//[GET] admin/roles/detail
+module.exports.detail = async (req, res)=>{
+    res.send("oke")
+}
+
+//[GET] admin/roles/edit
+module.exports.edit = async (req, res)=>{
+    res.send("oke")
+}
