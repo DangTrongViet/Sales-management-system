@@ -254,7 +254,6 @@ if(sort){
 //----------------------------------------------------------------------
 //Xóa 1 nhóm quyền
 const formDeletePermission = document.querySelector("#form-delete-permission")
-console.log(formDeletePermission)
 if(formDeletePermission){
     const path = formDeletePermission.getAttribute("data-path")
     const buttonDeletePermissions = document.querySelector("[button-delete-permission]");
@@ -271,3 +270,30 @@ if(formDeletePermission){
             }
     })
 }
+
+//----------------------------------------------------------------------
+//Xóa 1 danh mục sản phẩm
+const formDeleteCategory = document.querySelector("#form-delete-category");
+console.log(formDeleteCategory);
+
+if (formDeleteCategory) {
+    const path = formDeleteCategory.getAttribute("data-path");
+    console.log(path);
+
+    const buttonDeleteCategories = document.querySelectorAll("[button-delete-category]");
+    console.log(buttonDeleteCategories);
+
+    buttonDeleteCategories.forEach(buttonDeleteCategory => {
+        buttonDeleteCategory.addEventListener("click", () => {
+            const inConfirm = confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?");
+            if (inConfirm) {
+                const id = buttonDeleteCategory.getAttribute("data-id");
+
+                const newPath = `${path}/${id}?_method=DELETE`;
+                formDeleteCategory.action = newPath;
+                formDeleteCategory.submit(); // Gửi form lên server
+            }
+        });
+    });
+}
+

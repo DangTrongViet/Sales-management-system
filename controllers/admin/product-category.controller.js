@@ -109,9 +109,13 @@ module.exports.detail = async (req, res)=>{
 //5. [DELETE] xóa 1 sản phẩm
 module.exports.deleteItem = async (req, res) =>{
     const id = req.params.id
-    console.log("o day:", id)
-    //Xóa mềm
-    await ProductCategory.updateOne({_id: id}, {deleted: true})
-    req.flash('success', 'Sản phẩm đã bị xóa!');
-    res.redirect("back")
+
+    await ProductCategory.updateOne({_id: id}, {
+        deleted: true
+    })
+
+    //Xóa cứng (xóa luôn trong database)
+    //await Product.deleteOne({_id: id})
+    req.flash('success', 'Sản phẩm đã được xóa!');
+    res.redirect('back')
 }
