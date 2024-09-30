@@ -77,7 +77,7 @@ module.exports.editPatch = async (req, res)=>{
 }
 
 //[DELETE] admin/roles/delete/:id
-module.exports.deletePermisson= async (req, res)=>{
+module.exports.deletePermisson = async (req, res)=>{
     const id = req.params.id
 
     //Xóa mềm (thay đổi thuộc tính delete = true/false để hiển thị lên giao diện)
@@ -89,4 +89,18 @@ module.exports.deletePermisson= async (req, res)=>{
     //await Product.deleteOne({_id: id})
     req.flash('success', 'Sản phẩm đã được xóa!');
     res.redirect('back')
+}
+
+//4. Nhóm quyền
+//[GET] admin/roles/permissions
+module.exports.permissions = async (req, res)=>{
+    const find = {
+        deleted: false
+    }
+    const records = await Roles.find(find)
+
+    res.render("admin/pages/roles/permissions.pug", {
+        pageTitle: "Phân quyền",
+        records: records
+    })
 }

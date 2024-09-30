@@ -6,7 +6,7 @@ const controller = require("../../controllers/admin/role.controller.js")
 //Trang chính
 router.get('/', controller.index) 
 
-//Tạo nhóm quyền
+//1.Tạo nhóm quyền
 router.get('/create', controller.create) 
 router.post('/create', controller.createPost) 
 
@@ -19,6 +19,9 @@ router.patch('/edit/:id', controller.editPatch)
 
 //xóa
 router.delete('/delete/:id', controller.deletePermisson) 
+
+//2. Phân quyền
+router.get('/permissions', controller.permissions) 
 
 module.exports = router
 
