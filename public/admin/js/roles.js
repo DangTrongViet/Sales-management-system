@@ -25,10 +25,16 @@ if(tablePermission){
                     if(checked==true){
                         permission[index].permission.push(name)
                     }
-                    // console.log(name)
                 })
             }
             console.log(permission)
+            if(permission.length > 0){
+                const formChangePermission = document.querySelector("#form-change-permission")
+                const inputPermission = formChangePermission.querySelector("input[name='permission']")
+                inputPermission.value = JSON.stringify(permission)
+
+                formChangePermission.submit()
+            }
         })
     })
 }

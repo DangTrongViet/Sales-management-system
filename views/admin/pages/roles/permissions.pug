@@ -62,4 +62,16 @@ block main
         type="submit"
         class="btn btn-primary"
       ) + Tạo mới 
+  
+  form(
+    id="form-change-permission"
+    method="POST"
+    action=`${prefixAdmin}/roles/permissions?_method=PATCH`
+  )
+    div(class="form-group")
+      input(
+        type="text"
+        class="form-control"
+        name="permission"
+      )
   script(src="/admin/js/roles.js") 
