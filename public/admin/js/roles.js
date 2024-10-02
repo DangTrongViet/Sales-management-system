@@ -30,7 +30,7 @@ if(tablePermission){
             console.log(permission)
             if(permission.length > 0){
                 const formChangePermission = document.querySelector("#form-change-permission")
-                const inputPermission = formChangePermission.querySelector("input[name='permission']")
+                const inputPermission = formChangePermission.querySelector("input[name='permissions']")
                 inputPermission.value = JSON.stringify(permission)
 
                 formChangePermission.submit()
