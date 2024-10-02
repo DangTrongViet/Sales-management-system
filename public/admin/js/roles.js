@@ -1,5 +1,4 @@
 //Permission
-
 const tablePermission = document.querySelector("[table-permission]")
 if(tablePermission){
     const buttonSubmit = document.querySelector("[button-submit]") 
@@ -38,3 +37,12 @@ if(tablePermission){
         })
     })
 }
+
+//Permission default (Đổ ra những ô đã check)
+const dataRecords= document.querySelector("[data-records]")
+if(dataRecords){
+    console.log("o day")
+    const records =JSON.parse(dataRecords.getAttribute("data-records"))
+    console.log(records)
+}
+
