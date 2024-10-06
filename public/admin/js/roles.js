@@ -26,7 +26,7 @@ if(tablePermission){
                     }
                 })
             }
-            console.log(permission)
+            // console.log(permission)
             if(permission.length > 0){
                 const formChangePermission = document.querySelector("#form-change-permission")
                 const inputPermission = formChangePermission.querySelector("input[name='permissions']")
@@ -41,8 +41,15 @@ if(tablePermission){
 //Permission default (Đổ ra những ô đã check)
 const dataRecords= document.querySelector("[data-records]")
 if(dataRecords){
-    console.log("o day")
     const records =JSON.parse(dataRecords.getAttribute("data-records"))
+    const tablePermission = document.querySelector("[table-permission]")
     console.log(records)
+    records.forEach((record, index) =>{
+        const permissions = record.permissions
+        permissions.forEach(permission =>{
+            const row = tablePermission.querySelector(`[data-name="${permission}"]`)
+            const input = row.querySelectorAll("input")[index];
+            input.checked = true
+        })
+    })
 }
-
