@@ -28,5 +28,7 @@ module.exports.create = async (req, res)=>{
 }
 //[POST] admin/accounts/create
 module.exports.createPost = async (req, res)=>{
-    res.send("oke")
+    const records = new Account(req.body)
+    await records.save()
+    res.redirect(`${systemConfig.prefixAdmin}/accounts`)
 }

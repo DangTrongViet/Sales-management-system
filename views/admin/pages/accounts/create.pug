@@ -60,7 +60,7 @@ block main
         class="form-control-file"
         id="avatar"
         name="avatar"
-        accept="image/*"
+        accept="image/*" 
         upload-image-input
       ) 
       img(
@@ -74,7 +74,7 @@ block main
       select(name="role_id" id="role_id" class="form-control")
         option(disabled) -- Chọn -- 
         each item in roles 
-          option(value="") #{item.title}
+          option(value= item.id) #{item.title}
 
     div(class="form-group form-check form-check-inline")
       input(
