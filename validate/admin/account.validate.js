@@ -1,11 +1,16 @@
 module.exports.createPost = (req, res, next)=>{
-    if(!req.body.title){
-        req.flash('error', 'Vui lòng nhập sản phẩm!');
+    if(!req.body.fullName){
+        req.flash('error', 'Vui lòng nhập tên!');
         res.redirect("back")
         return;
     }
-    if(req.body.title.length < 8){
-        req.flash('error', 'Vui lòng nhập ít nhất 8 lý tự!');
+    if(!req.body.email){
+        req.flash('error', 'Vui lòng nhập email!');
+        res.redirect("back")
+        return;
+    }
+    if(!req.body.password){
+        req.flash('error', 'Vui lòng nhập mật khẩu!');
         res.redirect("back")
         return;
     }
