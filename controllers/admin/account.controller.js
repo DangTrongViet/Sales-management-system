@@ -52,3 +52,39 @@ module.exports.createPost = async (req, res)=>{
         res.redirect(`${systemConfig.prefixAdmin}/accounts`)
     }
 }
+
+
+//3
+//[GET] admin/accounts/edit/:id
+module.exports.edit = async (req, res)=>{
+    const find = {
+        _id: req.params.id,
+        deleted: false
+    }
+    const roles = await Roles.find({
+        deleted: false
+    })
+    const account = await Account.findOne(find)
+    // console.log(account)
+    res.render("admin/pages/accounts/edit.pug", {
+        pageTitle: "Chỉnh sửa tài khoản",
+        account: account,
+        roles:roles
+    })
+}
+
+// [PATCH] admin/accounts/edit/:id
+module.exports.editPatch = async (req, res)=>{
+    if(req.body.password){
+        req.body.password = md5(req.body.password)
+    }
+    try {
+        await Account.updateOne({_id: req.params.id}, req.body )
+        req.flash('success', 'Cập nhập thành công!');
+        res.redirect(`${systemConfig.prefixAdmin}/accounts`)
+    } catch (error) { 
+        console.error('Error updating product:', error);
+        req.flash('error', 'Cập nhật không thành công!');
+        return res.redirect('back');
+    }
+}
