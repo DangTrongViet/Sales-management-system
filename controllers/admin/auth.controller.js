@@ -19,7 +19,7 @@ module.exports.loginPost = async (req, res)=>{
         email: email,
         deleted: false
     })
-    
+
     if(!user){
         req.flash("error", "Email không tồn tại")
         res.redirect(`back`)
@@ -35,5 +35,6 @@ module.exports.loginPost = async (req, res)=>{
         res.redirect(`back`)
         return
     }
+    res.cookie("token", user.token)
     res.redirect(`${systemConfig.prefixAdmin}/dashboard`)
 }

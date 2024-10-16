@@ -2,9 +2,11 @@ const express = require('express')
 const router = express.Router()
 
 const controller = require("../../controllers/admin/auth.controller.js")
-
+const validate = require("../../validate/admin/auth.validate.js")
 router.get('/login', controller.login) 
-router.post('/login', controller.loginPost) 
+router.post('/login',
+    validate.loginPost,
+    controller.loginPost) 
 
 module.exports = router
 
