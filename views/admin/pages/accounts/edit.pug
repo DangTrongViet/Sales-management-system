@@ -93,7 +93,8 @@ block main
           class="form-check-input"
           id="statusActive"
           name="status"
-          checked = (account.status == "active" ? true : false)
+          value="active"
+          checked= (account.status === "active")
         )
         label(for="statusActive" class="form-check-label") Hoạt động
 
@@ -103,7 +104,8 @@ block main
           class="form-check-input"
           id="statusInActive"
           name="status"
-          checked = (account.status == "inactive" ? true : false)
+           value="inactive"
+          checked= (account.status === "inactive")
         )
         label(for="statusInActive" class="form-check-label") Dừng hoạt động
 
