@@ -35,6 +35,16 @@ module.exports.loginPost = async (req, res)=>{
         res.redirect(`back`)
         return
     }
+    //Tạo cookie
     res.cookie("token", user.token)
     res.redirect(`${systemConfig.prefixAdmin}/dashboard`)
+}
+
+
+//2.
+//[GET] admin/auth/logout
+module.exports.logout = async (req, res)=>{
+    //Xóa token trong cookie
+    res.clearCookie("token")
+    res.redirect(`${systemConfig.prefixAdmin}/auth/login`)
 }
