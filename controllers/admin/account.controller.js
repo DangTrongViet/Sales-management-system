@@ -110,3 +110,14 @@ module.exports.detail = async (req, res)=>{
         roles:roles
     })
 }
+
+//5 [DELETE] admin/accounts/delete/:id
+module.exports.delete = async (req, res)=>{
+    const id = req.params.id
+
+    await Account.updateOne({_id: id}, {
+        deleted: true
+    })
+    req.flash('success', 'Tài khoản đã được xóa!');
+    res.redirect('back')
+}

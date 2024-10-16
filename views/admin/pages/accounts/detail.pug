@@ -26,4 +26,8 @@ block main
         strong Avatar: 
         img(src=account.avatar alt="Avatar" class="avatar-img")
 
+      a(
+        href=`${prefixAdmin}/accounts/edit/${account._id}`
+        class="btn btn-warning"
+        ) Chỉnh sửa
   script(src="/admin/js/product.js")
