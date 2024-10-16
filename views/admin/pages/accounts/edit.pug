@@ -4,6 +4,7 @@ include ../../mixins/alert.pug
 block main 
   h1(class="mb-4") Chỉnh sửa tài khoản 
   +alert-error(5000)
+  +alert-success(5000)
 
   if !roles || roles.length === 0
     p Bạn chưa tạo nhóm quyền nào, hãy tạo nhóm quyền trước khi thực hiện chỉnh sửa
