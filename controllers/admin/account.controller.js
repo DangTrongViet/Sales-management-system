@@ -75,29 +75,38 @@ module.exports.edit = async (req, res)=>{
 
 // [PATCH] admin/accounts/edit/:id
 module.exports.editPatch = async (req, res)=>{
-    const id = req.params.id
-    const emailExit = await Account.findOne({
-        _id: {$ne: id},//Tìm bản khi khác email mình đnag xét để tránh lặp
-        email: req.body.email,
+    const find = {
+        _id: req.params.id,
         deleted: false
-    });
-    if(emailExit){
-        req.flash("error", `Email ${req.body.email} đã tồn tại!`)
-        res.redirect(`back`)
-    }else{
-        if(req.body.password){
-            req.body.password = md5(req.body.password)
-        }else{
-            delete req.body.password
-        }
-        try {
-            await Account.updateOne({_id: req.params.id}, req.body )
-            req.flash('success', 'Cập nhập thành công!');
-            res.redirect(`${systemConfig.prefixAdmin}/accounts`)
-        } catch (error) { 
-            console.error('Error updating product:', error);
-            req.flash('error', 'Cập nhật không thành công!');
-            return res.redirect('back');
-        }
     }
+    const roles = await Roles.find({
+        deleted: false
+    })
+    const account = await Account.findOne(find)
+    console.log(account)
+    res.render("admin/pages/accounts/edit.pug", {
+        pageTitle: "Chỉnh sửa tài khoản",
+        account: account,
+        roles:roles
+    })
+}
+
+
+//4
+//[GET] admin/accounts/detail/:id
+module.exports.detail = async (req, res)=>{
+    const find = {
+        _id: req.params.id,
+        deleted: false
+    }
+    const roles = await Roles.find({
+        deleted: false
+    })
+    const account = await Account.findOne(find)
+    console.log(account)
+    res.render("admin/pages/accounts/detail.pug", {
+        pageTitle: "Chỉnh sửa tài khoản",
+        account: account,
+        roles:roles
+    })
 }
