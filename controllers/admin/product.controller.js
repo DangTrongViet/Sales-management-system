@@ -5,7 +5,7 @@ const searchHelper = require("../../helpers/search.js")
 const paginationHelper = require("../../helpers/pagination.js")
 const systemConfig = require("../../config/system.js")
 const createTreeHelper = require("../../helpers/createTree")
-
+const Account = require("../../models/account.model.js")
 //1. [GET] /admin/products
 module.exports.index = async (req, res)=>{
     //1. Xử lý lọc sản phẩm
@@ -46,7 +46,17 @@ module.exports.index = async (req, res)=>{
                                   .sort(sort)
                                   .limit(objectPagination.limitItem)
                                   .skip(objectPagination.skip) //limit: giới hạn SL sản phẩm mỗi trang, skip: số sản phẩm bỏ qua 
+    
+    for (const product of products){
+        const user = await Account.findOne({
+            _id: product.createdBy.account_id
+        })
+        if(user){
+            product.accountFullname = user.fullName
+        }
+    }
 
+    
     res.render("admin/pages/products/index.pug", {
         pageTitle: "Danh sách sản phẩm",
         products: products,
@@ -184,6 +194,10 @@ module.exports.createPost = async (req, res)=>{
         req.body.position = countProducts + 1
     }else{
         req.body.position = parseInt(req.body.position)
+    }
+
+    req.body.createdBy = {
+        account_id: res.locals.user.id 
     }
     
     //Tạo mới 1 sản phẩm với data lấy từ "req.body"

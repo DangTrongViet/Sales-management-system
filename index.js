@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const methodOverride = require('method-override');
 var path = require('path');
+const moment = require("moment")
 
 // Tải biến môi trường
 require('dotenv').config();
@@ -40,6 +41,7 @@ app.use(bodyParser.json());
 
 // App local variable
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
+app.locals.moment = moment;
 
 // Khởi tạo session và flash
 app.use(cookieParser('Tienanh@123'));

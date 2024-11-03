@@ -20,6 +20,13 @@ const productSchema = new mongoose.Schema(
       slug: "title", // Tạo slug từ trường "title"
       unique: true   // Đảm bảo slug là duy nhất
     },
+    createdBy: {
+      account_id: String,
+      createdAt: {
+        type: Date,
+        default: Date.now
+      }
+    },
     deleted: { type: Boolean, default: false },
     deletedAt: Date
   },
