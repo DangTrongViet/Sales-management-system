@@ -28,7 +28,11 @@ const productSchema = new mongoose.Schema(
       }
     },
     deleted: { type: Boolean, default: false },
-    deletedAt: Date
+    // deletedAt: Date
+    deletedBy: { 
+      account_id: String,
+      deletedAt: Date
+    },
   },
   {
     timestamps: true // Tự động thêm trường createdAt và updatedAt
