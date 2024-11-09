@@ -46,7 +46,6 @@ module.exports.index = async (req, res)=>{
                                   .sort(sort)
                                   .limit(objectPagination.limitItem)
                                   .skip(objectPagination.skip) //limit: giới hạn SL sản phẩm mỗi trang, skip: số sản phẩm bỏ qua 
-    
     for (const product of products){
         //Lấy ra thông tin người tạo  
         const user = await Account.findOne({
@@ -54,15 +53,16 @@ module.exports.index = async (req, res)=>{
         })
         if(user){
             product.accountFullname = user.fullName
+            // console.log("O day" ,user)
         }
-
+        // console.log("product", i, product)
         //Lấy ra thông tin người sửa
         const updatedBy = product.updatedBy[product.updatedBy.length - 1];
+        // console.log("updatedBy" ,updatedBy)
         if(updatedBy){
             const userUpdated = await Account.findOne({
                 _id: updatedBy.account_id
             })
-
             updatedBy.accountFullname = userUpdated.fullName
         }
     }
