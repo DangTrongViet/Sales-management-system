@@ -13,14 +13,20 @@ module.exports.index =  async(req, res)=>{ //Cái này là cú pháp đặt tên
 
     const productsFeatured = await Product.find(find).limit(6)
 
-    // const productCategory = await ProductCategory.find(find)
-    // const newProductCategory = createTreeHelper.tree(productCategory)
-    const newProducts = productHelper.priceNewProducts(productsFeatured)
+    // Lấy ra các sản phẩm nổi bật
+    const newProductsFeatured = productHelper.priceNewProducts(productsFeatured)
 
-    // console.log(productsFeatured)
+    //Lấy ra các sản phẩm mới nhất
+    const productsNew = await Product.find({
+        deleted: false,
+        status: "active"
+    }).sort({position: "desc"}).limit(6)
+
+    const newProductsNew = productHelper.priceNewProducts(productsNew)
+
     res.render("client/pages/home/index.pug", {
         pageTitle: "Tranh chủ",
-        productsFeatured: newProducts
-        //layoutProductCategory: newProductCategory
+        productsFeatured: newProductsFeatured,
+        productsNew: newProductsNew
     })
 };
