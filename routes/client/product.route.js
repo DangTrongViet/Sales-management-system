@@ -4,8 +4,11 @@ const router = express.Router()
 const controller = require("../../controllers/client/product.controller.js")
 router.get('/', controller.index)
 
+router.get('/:slugCategory', controller.category)
+
+
 //Chi tiết sản phẩm
-router.get('/:slug', controller.detail)
+// router.get('/:slug', controller.detail)
 
 module.exports = router
 
