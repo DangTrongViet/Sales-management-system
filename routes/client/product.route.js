@@ -8,7 +8,7 @@ router.get('/:slugCategory', controller.category)
 
 
 //Chi tiết sản phẩm
-// router.get('/:slug', controller.detail)
+router.get('/detail/:slugProduct', controller.detail)
 
 module.exports = router
 

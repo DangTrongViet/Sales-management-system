@@ -20,25 +20,36 @@ module.exports.index = async (req, res)=>{
 }
 
 //2. Hiển thị chi tiết sản phẩm
-// module.exports.detail = async (req, res) => {
-//     try {
-//         const find = {
-//             deleted: false, 
-//             slug: req.params.slug,
-//             status: "active"
-//         };
-//         const product = await Product.findOne(find);
+module.exports.detail = async (req, res) => {
+    try {
+        const find = {
+            deleted: false, 
+            slug: req.params.slugProduct,
+            status: "active"
+        };
+        const product = await Product.findOne(find);
 
-//         res.render("client/pages/products/detail", {
-//             pageTitle: product.title, 
-//             product: product, 
-//         });
+        if(product.product_category_id){
+            const category = await ProductCategory.findOne({
+                _id: product.product_category_id,
+                status: "active",
+                deleted: false
+            })
+            product.category = category
+        }
 
-//     } catch (error) {
-//         console.error(error);
-//         res.redirect(`/products`);
-//     }
-// };
+        product.priceNew = productHelper.priceNewProduct(product)
+
+        res.render("client/pages/products/detail", {
+            pageTitle: product.title, 
+            product: product, 
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.redirect(`/products`);
+    }
+};
 
 
 module.exports.category = async(req, res)=>{
