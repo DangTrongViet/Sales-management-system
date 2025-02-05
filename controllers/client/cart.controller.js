@@ -8,19 +8,40 @@ module.exports.addPost = async (req, res)=>{
     const productId = req.params.productId
     const quantity = parseInt(req.body.quantity)
 
-    const objectCart = {
-        product_id: productId,
-        quantity: quantity
+    const cart = await Cart.findOne({
+        _id: cartId
+    })
+
+    if(cart){
+        const existProductInCart = cart.products.find(item => item.product_id == productId)
     }
 
-    await Cart.updateOne(
-        {
-           _id: cartId
-        },
-        {
-            $push: {products: objectCart}
+    if(existProductInCart){
+        const newQuantity = existProductInCart.quantity + quantity
+        await Cart.updateOne(
+            {
+               _id: cartId,
+               'products.product_id': productId
+            },
+            {
+                'products.$.quantity': newQuantity
+            }
+        )
+    }else{
+        const objectCart = {
+            product_id: productId,
+            quantity: quantity
         }
-    )
-    req.flash("success", "Thêm sản phẩm thành công")
+    
+        await Cart.updateOne(
+            {
+               _id: cartId
+            },
+            {
+                $push: {products: objectCart}
+            }
+        )
+        req.flash("success", "Thêm sản phẩm thành công")
+    }
     res.redirect("back")
 }
