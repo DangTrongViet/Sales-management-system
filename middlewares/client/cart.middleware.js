@@ -13,7 +13,14 @@ module.exports.cartId = async(req, res, next)=>{
 
     }else{
         //Khi đã có giỏ hàng
+        const cart = await Cart.findOne({
+            _id: req.cookies.cartId
+        })
 
+        cart.totalQuatity = cart.products.reduce((sum, item) => sum + item.quantity, 0)
+
+        res.locals.miniCart = cart
+        // console.log("hihi", cart.totalQuatity)
     }
     next()
 }
