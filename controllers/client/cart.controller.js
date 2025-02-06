@@ -67,6 +67,7 @@ module.exports.addPost = async (req, res) => {
         }
     } else {
         // Nếu giỏ hàng chưa tồn tại, tạo mới
+        console.log("tui o day nha ba con")
         await Cart.create({
             _id: cartId,
             products: [{ product_id: productId, quantity: quantity }]
@@ -75,3 +76,19 @@ module.exports.addPost = async (req, res) => {
     }
     res.redirect("back");
 };
+
+
+//[DELETE] /cart/delete/:productId
+module.exports.deleteProduct = async(req, res)=>{
+    const productId = req.params.productId
+
+    const cartId = req.cookies.cartId
+    let cart = await Cart.findOne({ _id: cartId });
+
+    if (cart) {
+        cart.products = cart.products.filter(item => item.product_id.toString() !== productId);
+        await cart.save();
+        req.flash("success", "Xóa sản phẩm thành công");
+    }
+    res.redirect("back");
+}

@@ -5,6 +5,8 @@ const controller = require("../../controllers/client/cart.controller.js")
 
 router.get('/', controller.index)
 
+router.get('/delete/:productId', controller.deleteProduct)
+
 
 router.post('/add/:productId', controller.addPost)
 
