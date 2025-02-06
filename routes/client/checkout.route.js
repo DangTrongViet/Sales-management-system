@@ -5,10 +5,6 @@ const controller = require("../../controllers/client/checkout.controller.js")
 
 router.get('/', controller.index)
 
-// router.get('/delete/:productId', controller.deleteProduct)
-
-// router.get('/update/:productId/:quantity', controller.updateProduct)
-
-// router.post('/add/:productId', controller.addPost)
+router.post('/order', controller.order)
 
 module.exports = router
