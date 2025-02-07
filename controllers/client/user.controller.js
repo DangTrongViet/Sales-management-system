@@ -117,8 +117,8 @@ module.exports.forgotPasswordPost = async(req, res)=>{
     await forgotPassword.save()
 
     //console.log(objectForgotPassword)
-    //Việc 2: Gửi mã OTP qua email cho người dùng
-    //code sau
+    //Việc 2: Gửi mã OTP qua email cho người dùng bằng thư viện "npm i nodemailer"
+    
 
     res.redirect(`/user/password/otp?email=${email}`)
 }
