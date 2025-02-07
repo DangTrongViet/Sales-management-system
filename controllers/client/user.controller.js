@@ -116,9 +116,42 @@ module.exports.forgotPasswordPost = async(req, res)=>{
     const forgotPassword = new ForgotPassword(objectForgotPassword)
     await forgotPassword.save()
 
-    // console.log(objectForgotPassword)
+    //console.log(objectForgotPassword)
     //Việc 2: Gửi mã OTP qua email cho người dùng
+    //code sau
 
+    res.redirect(`/user/password/otp?email=${email}`)
+}
 
-    res.send("oke")
+//[GET] trang nhập mã otp /user/password/otp
+module.exports.otpPassword = async(req, res)=>{
+    const email = req.query.email
+    res.render("client/pages/user/otp-password", {
+        pageTitle: "Nhập mã OTP",
+        email: email
+    })
+}
+//[POST] /user/password/otp
+module.exports.otpPasswordPost = async(req, res)=>{
+    const email = req.body.email
+    const otp = req.body.otp
+
+    const result = await ForgotPassword.findOne({
+        email: email,
+        otp: otp
+    })
+
+    // console.log(result)
+    if(!result){
+        req.flash('error', 'OTP không hợp lệ!');
+        res.redirect("back")
+        return;
+    }
+
+    const user = await User.findOne({
+        email: email
+    })
+
+    res.cookie("tokenUser", user.tokenUser)
+    res.redirect("/user/password/reset")
 }
