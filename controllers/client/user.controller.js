@@ -167,8 +167,21 @@ module.exports.resetPassword = async(req, res)=>{
 // [POST] /user/password/reset
 module.exports.resetPasswordPost = async(req, res)=>{
     const password = req.body.password
-    const confirmPassword = req.body.confirmPassword
-    
-    console.log(req.body)
-    res.send("oke")
+    const tokenUser = req.cookies.tokenUser
+
+    await User.updateOne(
+        {
+            tokenUser:tokenUser
+        },
+        {
+            password: md5(password)
+        }
+    )
+    req.flash('success', 'Đổi mật khẩu thành công.');
+    res.redirect("/")
 }
+
+/*
+email: truongtienanh16@gmail.com
+password: 12345
+*/
