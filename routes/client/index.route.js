@@ -6,12 +6,15 @@ const cartMiddleware = require("../../middlewares/client/cart.middleware.js")
 const cartRoute = require("./cart.route.js")
 const checkoutRoute = require("./checkout.route.js")
 const userRoute = require("./user.route.js")
+const userMiddleware = require("../../middlewares/client/user.middleware.js")
 
 //Tách riêng các thằng routes này ra để dễ quản lý
 module.exports = (app)=>{ //Lệnh này là exports trong express
     app.use(categoryMiddleware.category)
 
     app.use(cartMiddleware.cartId)
+
+    app.use(userMiddleware.infoUser)
 
     app.use('/', homeRoutes)
 
