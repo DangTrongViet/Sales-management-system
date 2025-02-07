@@ -111,7 +111,7 @@ module.exports.forgotPasswordPost = async(req, res)=>{
     const objectForgotPassword = {
         email: email,
         otp: otp,
-        expireAt: Date.now()
+        expireAt: new Date(Date.now() + 180 * 1000) // 180 giây sau
     }
     const forgotPassword = new ForgotPassword(objectForgotPassword)
     await forgotPassword.save()
@@ -154,4 +154,21 @@ module.exports.otpPasswordPost = async(req, res)=>{
 
     res.cookie("tokenUser", user.tokenUser)
     res.redirect("/user/password/reset")
+}
+
+//Reset lại mật khẩu
+//[GET] user/password/reset
+module.exports.resetPassword = async(req, res)=>{
+    res.render("client/pages/user/reset-password", {
+        pageTitle: "Đổi mật khẩu",
+    })
+}
+
+// [POST] /user/password/reset
+module.exports.resetPasswordPost = async(req, res)=>{
+    const password = req.body.password
+    const confirmPassword = req.body.confirmPassword
+    
+    console.log(req.body)
+    res.send("oke")
 }

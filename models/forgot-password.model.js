@@ -6,13 +6,16 @@ const forgotPasswordSchema = new mongoose.Schema(
     otp: String,
     expireAt: { 
         type: Date,  
-        expires: 180
+        expires: 0,
+        default: () => new Date(Date.now() + 180 * 1000), // 180 giây sau
     },
   },
   {
     timestamps: true // Tự động thêm trường createdAt và updatedAt
   }
 );
+
+forgotPasswordSchema.index({ expireAt: 1 }, { expireAfterSeconds: 0 });
 
 const ForgotPassword = mongoose.model('ForgotPassword', forgotPasswordSchema, "forgot-password");
 
