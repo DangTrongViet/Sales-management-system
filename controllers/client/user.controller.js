@@ -1,5 +1,8 @@
 const md5 = require("md5")
 const User = require("../../models/user.model.js")
+const ForgotPassword = require("../../models/forgot-password.model.js")
+const generateHelper = require("../../helpers/generate.js") 
+
 
 // [GET] /user/register
 module.exports.register = async(req, res)=>{
@@ -79,4 +82,43 @@ module.exports.loginPost = async(req, res)=>{
 module.exports.logout = async(req, res)=>{
     res.clearCookie("tokenUser")
     res.redirect("/")
+}
+
+
+//[GET] user/password/forgot
+module.exports.forgotPassword = async(req, res)=>{
+    res.render("client/pages/user/forgot-password", {
+        pageTitle: "Quên mật khẩu",
+    })
+}
+
+//[POST] user/password/forgot
+module.exports.forgotPasswordPost = async(req, res)=>{
+    const email = req.body.email
+    const user = await User.findOne({
+        email: email,
+        deleted: false
+    })
+
+    if(!user){
+        req.flash('error', 'Email không tồn tại!');
+        res.redirect("back")
+        return;
+    }
+
+    //Việc 1: Tạo mã OTP và lưu OPT, email vào collection forgot-password
+    const otp = generateHelper.generateRandomNumber(4)
+    const objectForgotPassword = {
+        email: email,
+        otp: otp,
+        expireAt: Date.now()
+    }
+    const forgotPassword = new ForgotPassword(objectForgotPassword)
+    await forgotPassword.save()
+
+    // console.log(objectForgotPassword)
+    //Việc 2: Gửi mã OTP qua email cho người dùng
+
+
+    res.send("oke")
 }
