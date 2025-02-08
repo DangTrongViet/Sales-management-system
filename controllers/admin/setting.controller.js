@@ -23,5 +23,4 @@ module.exports.generalPatch = async(req, res)=>{
     }
     req.flash("success", "Cập nhập thành công!")
     res.redirect("back")
-    //1:25:06
 }
