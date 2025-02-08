@@ -19,6 +19,7 @@ block main
                 class="form-control"
                 id="websiteName"
                 name="websiteName"
+                value= (settingGeneral ? settingGeneral.websiteName : "")
             )
 
         div(
@@ -36,7 +37,7 @@ block main
             )
 
             img(
-                src=""
+                src= (settingGeneral ? settingGeneral.logo : "")
                 class="image-preview"
                 upload-image-preview
             )
@@ -48,6 +49,7 @@ block main
                 class="form-control"
                 id="phone"
                 name="phone"
+                value= (settingGeneral ? settingGeneral.phone : "")
             )
 
         div(class="form-group")
@@ -57,6 +59,7 @@ block main
                 class="form-control"
                 id="email"
                 name="email"
+                value= (settingGeneral ? settingGeneral.email : "")
             )
 
         div(class="form-group")
@@ -66,6 +69,7 @@ block main
                 class="form-control"
                 id="address"
                 name="address"
+                value= (settingGeneral ? settingGeneral.address : "")
             )
 
         div(class="form-group")
@@ -75,6 +79,7 @@ block main
                 class="form-control"
                 id="copyright"
                 name="copyright"
+                value= (settingGeneral ? settingGeneral.copyright : "")
             )
         div(class="form-group")
             button(
