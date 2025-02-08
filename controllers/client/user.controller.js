@@ -2,6 +2,7 @@ const md5 = require("md5")
 const User = require("../../models/user.model.js")
 const ForgotPassword = require("../../models/forgot-password.model.js")
 const generateHelper = require("../../helpers/generate.js") 
+const sendMailHelper = require("../../helpers/sendMail.js") 
 
 
 // [GET] /user/register
@@ -118,7 +119,7 @@ module.exports.forgotPasswordPost = async(req, res)=>{
 
     //console.log(objectForgotPassword)
     //Việc 2: Gửi mã OTP qua email cho người dùng bằng thư viện "npm i nodemailer"
-    
+    sendMailHelper.sendMail();
 
     res.redirect(`/user/password/otp?email=${email}`)
 }
