@@ -108,7 +108,7 @@ module.exports.forgotPasswordPost = async(req, res)=>{
     }
 
     //Việc 1: Tạo mã OTP và lưu OPT, email vào collection forgot-password
-    const otp = generateHelper.generateRandomNumber(4)
+    const otp = generateHelper.generateRandomNumber(6)
     const objectForgotPassword = {
         email: email,
         otp: otp,
@@ -119,7 +119,21 @@ module.exports.forgotPasswordPost = async(req, res)=>{
 
     //console.log(objectForgotPassword)
     //Việc 2: Gửi mã OTP qua email cho người dùng bằng thư viện "npm i nodemailer"
-    sendMailHelper.sendMail();
+    const subject = `Mã OTP xác minh lấy lại mật khẩu`;
+    const html = `
+        <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; text-align: center;">
+            <div style="max-width: 500px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                <h2 style="color: #333;">Xác minh tài khoản</h2>
+                <p style="font-size: 16px; color: #555;">Mã xác minh tài khoản của bạn là:</p>
+                <p style="font-size: 24px; font-weight: bold; color: #e63946; margin: 10px 0;">${otp}</p>
+                <p style="font-size: 14px; color: #777;">Có hiệu lực trong 3 phút.</p>
+                <p style="font-size: 14px; color: red; font-weight: bold;">KHÔNG chia sẻ mã này với người khác.</p>
+            </div>
+        </div>
+    `;
+
+    sendMailHelper.sendMail(email, subject, html);
+
 
     res.redirect(`/user/password/otp?email=${email}`)
 }
