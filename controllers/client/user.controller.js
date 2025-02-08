@@ -200,3 +200,11 @@ module.exports.resetPasswordPost = async(req, res)=>{
 email: truongtienanh16@gmail.com
 password: 12345
 */
+
+//Thông tin khách hàng
+//[GET] user/info
+module.exports.infoUser = async(req, res)=>{
+    res.render("client/pages/user/info", {
+        pageTitle: "Thông tin tài khoản",
+    })
+}
