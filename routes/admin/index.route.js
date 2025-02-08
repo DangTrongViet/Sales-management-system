@@ -8,6 +8,8 @@ const accountRoutes = require("./account.route.js")
 const authRoutes = require("./auth.route.js")
 const myAccountRoutes = require("./my-account.route.js")
 const systemConfig = require("../../config/system.js")
+const settingRoute = require("./setting.route.js")
+
 
 module.exports = (app)=>{ 
     const PATH_ADMIN = systemConfig.prefixAdmin//Tách riêng cái "/admin" qua file system.js
@@ -30,4 +32,6 @@ module.exports = (app)=>{
     app.use(PATH_ADMIN + '/my-account',
         authMiddleware.requireAuth,
         myAccountRoutes)
+    
+    app.use(PATH_ADMIN + '/settings', settingRoute)
 }
