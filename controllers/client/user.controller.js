@@ -3,7 +3,7 @@ const User = require("../../models/user.model.js")
 const ForgotPassword = require("../../models/forgot-password.model.js")
 const generateHelper = require("../../helpers/generate.js") 
 const sendMailHelper = require("../../helpers/sendMail.js") 
-
+const Cart = require("../../models/cart.model.js")
 
 // [GET] /user/register
 module.exports.register = async(req, res)=>{
@@ -75,6 +75,13 @@ module.exports.loginPost = async(req, res)=>{
 
     // console.log(req.body)
     res.cookie("tokenUser", user.tokenUser)
+
+    //lưu user_id vào model carts
+    await Cart.updateOne({
+        _id: req.cookies.cartId
+    },{
+        user_id: user.id
+    })
     res.redirect("/")
 }
 

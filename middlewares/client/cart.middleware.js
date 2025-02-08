@@ -1,7 +1,5 @@
 const Cart = require("../../models/cart.model")
 
-
-
 module.exports.cartId = async(req, res, next)=>{
     if(!req.cookies.cartId){
         //Khi chưa có giỏ hàng
