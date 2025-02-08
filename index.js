@@ -63,6 +63,12 @@ app.use(
 routeAdmin(app);
 route(app);
 
+app.get("*", (req, res) =>{
+  res.render("client/pages/errors/404", {
+    pageTitle: "404 Not Found"
+  })
+})
+
 // Khởi động server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
