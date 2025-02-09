@@ -34,5 +34,14 @@ socket.on("SERVER_RETURN_MASSAGE", (data)=>{
         <div class="inner-content">${data.content}</div>
     `
     body.appendChild(div)
+    body.scrollTop = body.scrollHeight
 })
 // END_SERVER_RETURN_MASSAGE
+
+// Scroll Chat to button
+const bodyChat = document.querySelector(".chat .inner-body")
+if(bodyChat){
+    bodyChat.scrollTop = bodyChat.scrollHeight
+}
+
+// 16:32
