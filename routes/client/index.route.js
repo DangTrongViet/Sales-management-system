@@ -9,6 +9,7 @@ const userRoute = require("./user.route.js")
 const userMiddleware = require("../../middlewares/client/user.middleware.js")
 const settingMiddleware = require("../../middlewares/client/setting.middleware.js")
 const chatRoute = require("./chat.route.js")
+const authMiddleware = require("../../middlewares/client/auth.middleware.js")
 
 
 //Tách riêng các thằng routes này ra để dễ quản lý
@@ -33,5 +34,5 @@ module.exports = (app)=>{ //Lệnh này là exports trong express
 
     app.use("/user", userRoute)
 
-    app.use("/chat", chatRoute)
+    app.use("/chat",authMiddleware.requireAuth, chatRoute)
 }
