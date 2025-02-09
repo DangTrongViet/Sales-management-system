@@ -43,37 +43,40 @@ module.exports.addPost = async (req, res) => {
     const cartId = req.cookies.cartId;
     const productId = req.params.productId;
     const quantity = parseInt(req.body.quantity);
+    
+    const cart = await Cart.findOne({ _id: cartId });
 
-    let cart = await Cart.findOne({ _id: cartId });
+    const existProductInCart = cart.products.find(item => item.product_id == productId)
 
-    if (cart) {
-        // Kiểm tra sản phẩm đã có trong giỏ hàng chưa
-        let existProductInCart = cart.products.find(item => item.product_id == productId);
+    if(existProductInCart){
+        const newQuantity = quantity + existProductInCart.quantity;
 
-        if (existProductInCart) {
-            // Nếu có, cập nhật số lượng
-            await Cart.updateOne(
-                { _id: cartId, 'products.product_id': productId },
-                { $inc: { 'products.$.quantity': quantity } } // Dùng $inc để tăng số lượng
-            );
-            req.flash("success", "Thêm sản phẩm thành công");
-        } else {
-            // Nếu chưa có, thêm sản phẩm vào giỏ hàng
-            await Cart.updateOne(
-                { _id: cartId },
-                { $push: { products: { product_id: productId, quantity: quantity } } }
-            );
-            req.flash("success", "Thêm sản phẩm thành công");
-        }
-    } else {
-        // Nếu giỏ hàng chưa tồn tại, tạo mới
-        console.log("tui o day nha ba con")
-        await Cart.create({
-            _id: cartId,
-            products: [{ product_id: productId, quantity: quantity }]
-        });
-        req.flash("success", "Thêm sản phẩm thành công");
+        await Cart.updateOne(
+            {
+                _id: cartId,
+                "products.product_id": productId
+            },
+            {
+                "products.$.quantity": newQuantity
+            }
+        );
+    }else{
+        const objectCart = {
+            product_id: productId,
+            quantity: quantity
+        };
+        
+        await Cart.updateOne(
+            {
+                _id: cartId,
+            },
+            {
+                $push: { products: objectCart }
+            }
+        );
+        
     }
+    req.flash("success", "Thêm sản phẩm thành công");
     res.redirect("back");
 };
 
