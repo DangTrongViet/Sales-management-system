@@ -12,3 +12,27 @@ if(formSendData){
     })
 }
 // END_CLIENT_SEND_MESSAGE
+
+// SERVER_RETURN_MASSAGE
+socket.on("SERVER_RETURN_MASSAGE", (data)=>{
+    const body = document.querySelector(".chat .inner-body")
+    const myId = document.querySelector("[my-id]").getAttribute("my-id")
+
+    const div = document.createElement("div")
+
+    let htmlFullName = ""
+
+    if(myId == data.userId){
+        div.classList.add("inner-outgoing")
+    }else{
+        div.classList.add("inner-incoming")
+        htmlFullName = `<div class="inner-name">${data.fullName}</div>`
+    }
+
+    div.innerHTML = `
+        ${htmlFullName}
+        <div class="inner-content">${data.content}</div>
+    `
+    body.appendChild(div)
+})
+// END_SERVER_RETURN_MASSAGE
