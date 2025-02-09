@@ -35,9 +35,7 @@ app.set('view engine', 'pug');
 const server = http.createServer(app);
 const io = new Server(server);
 
-io.on('connection', (socket) => {
-  console.log('a user connected', socket.id);
-})
+global._io = io
 
 // Static files: thiết lập folder public là file tĩnh để công khai ra bên ngoài
 console.log(__dirname)
