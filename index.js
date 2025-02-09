@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const methodOverride = require('method-override');
 var path = require('path');
+const http = require('http');
+const { Server } = require("socket.io");
 const moment = require("moment")
 
 // Tải biến môi trường
@@ -28,6 +30,14 @@ app.use(methodOverride('_method')); // Phải đặt trước các middleware kh
 // Cấu hình Pug làm engine template
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'pug');
+
+//Socket io: chat realtime
+const server = http.createServer(app);
+const io = new Server(server);
+
+io.on('connection', (socket) => {
+  console.log('a user connected', socket.id);
+})
 
 // Static files: thiết lập folder public là file tĩnh để công khai ra bên ngoài
 console.log(__dirname)
@@ -71,6 +81,7 @@ app.get("*", (req, res) =>{
 
 // Khởi động server
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+
+server.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
