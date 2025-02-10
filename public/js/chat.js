@@ -49,6 +49,17 @@ if(bodyChat){
 }
 
 //emoji-picker
+//shown typing
+var timeOut;
+const showTyping = () =>{
+    socket.emit("CLIENT_SEND_TYPING", "show")
+    clearTimeout(timeOut)
+
+    timeOut = setTimeout(()=>{
+        socket.emit("CLIENT_SEND_TYPING", "hidden")
+    }, 3000)
+}
+
 //Shown popper
 const buttonIcon = document.querySelector(".button-icon")
 if(buttonIcon){
@@ -68,17 +79,12 @@ if(emojiClick){
         const icon = event.detail.unicode
         //console.log(icon)
         inputChat.value = inputChat.value + icon
+
+        showTyping()
     })
 
-    var timeOut;
-
     inputChat.addEventListener("keyup", ()=>{
-        socket.emit("CLIENT_SEND_TYPING", "show")
-        clearTimeout(timeOut)
-
-        timeOut = setTimeout(()=>{
-            socket.emit("CLIENT_SEND_TYPING", "hidden")
-        }, 3000)
+        showTyping()
     })
 }
 //end-emoji-picker
