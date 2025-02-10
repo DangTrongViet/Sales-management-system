@@ -77,8 +77,10 @@ if(emojiClick){
 
     emojiClick.addEventListener("emoji-click", (event)=>{
         const icon = event.detail.unicode
-        //console.log(icon)
         inputChat.value = inputChat.value + icon
+        const end = inputChat.value.length
+        inputChat.setSelectionRange(end, end)
+        inputChat.focus()
 
         showTyping()
     })
