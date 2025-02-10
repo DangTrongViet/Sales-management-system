@@ -91,6 +91,7 @@ if(elementListTyping){
         if(data.type == "show"){
             const existTyping = elementListTyping.querySelector(`[user-id="${data.userId}"]`)
             if(!existTyping){
+                const bodyChat = document.querySelector(".chat .inner-body")
                 const boxTyping = document.createElement("div")
                 boxTyping.classList.add("box-typing")
                 boxTyping.setAttribute("user-id", data.userId)
@@ -104,6 +105,7 @@ if(elementListTyping){
                     </div>
                 `
                 elementListTyping.appendChild(boxTyping)
+                bodyChat.scrollTop = bodyChat.scrollHeight
             }
         }else{
             const boxTypingRemove = elementListTyping.querySelector(`[user-id="${data.userId}"]`)
