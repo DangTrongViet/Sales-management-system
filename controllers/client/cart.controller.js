@@ -76,6 +76,8 @@ module.exports.addPost = async (req, res) => {
         );
         
     }
+    //Clear giỏ hàng
+    //await Cart.deleteMany({ _id: { $ne: cartId } });
     req.flash("success", "Thêm sản phẩm thành công");
     res.redirect("back");
 };
