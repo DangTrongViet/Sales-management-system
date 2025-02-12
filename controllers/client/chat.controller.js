@@ -9,11 +9,12 @@ module.exports.index = async(req, res)=>{
 
     //SocketIo
     _io.once('connection', (socket) => {
-        socket.on("CLIENT_SEND_MESSAGE", async(content)=>{
+        socket.on("CLIENT_SEND_MESSAGE", async(data)=>{
             //Lưu vào data base
             const chat = new Chat({
                 user_id: userId,
-                content: content
+                content: data.content,
+                images: data.images
             })
             await chat.save()
 
@@ -21,7 +22,8 @@ module.exports.index = async(req, res)=>{
             _io.emit("SERVER_RETURN_MASSAGE", {
                 userId: userId,
                 fullName: fullName,
-                content: content
+                content: data.content,
+                images: data.images
             })
         })
 

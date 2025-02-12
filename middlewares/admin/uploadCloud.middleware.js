@@ -9,32 +9,32 @@ cloudinary.config({
 });
 
 //Xử lý đẩy ảnh lên cloud
-module.exports.upload = (req, res, next)=>{
+let streamUpload = (buffer) => {
+  return new Promise((resolve, reject) => {
+      let stream = cloudinary.uploader.upload_stream(
+        (error, result) => {
+          if (result) {
+            resolve(result);
+          } else {
+            reject(error);
+          }
+        }
+      );
+
+    streamifier.createReadStream(buffer).pipe(stream);
+  });
+};
+
+const uploadToClouddinary = async(buffer) => {
+  let result = await streamUpload(buffer);
+  return result.url
+}
+
+module.exports.upload = async(req, res, next)=>{
     if(req.file){
-        let streamUpload = (req) => {
-          return new Promise((resolve, reject) => {
-              let stream = cloudinary.uploader.upload_stream(
-                (error, result) => {
-                  if (result) {
-                    resolve(result);
-                  } else {
-                    reject(error);
-                  }
-                }
-              );
-  
-            streamifier.createReadStream(req.file.buffer).pipe(stream);
-          });
-      };
-      async function upload(req) {
-        let result = await streamUpload(req);
-        req.body[req.file.fieldname] = result.url
-        next();
-      }
-
-      upload(req);
-
-    } else{
-      next();
-    }
+      const result = await uploadToClouddinary(req.file.buffer);
+      //console.log("result", result)
+      req.body[req.file.fieldname] = result
+    } 
+    next();
 }

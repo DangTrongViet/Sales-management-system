@@ -1,15 +1,27 @@
 import * as Popper from 'https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js'
 
+import { FileUploadWithPreview } from "https://unpkg.com/file-upload-with-preview/dist/index.js"
+const upload = new FileUploadWithPreview('upload-image',{
+    multiple: true,
+    maxFileCount: 6
+});
+
 // CLIENT_SEND_MESSAGE
 const formSendData = document.querySelector(".chat .inner-form")
 if(formSendData){
     formSendData.addEventListener("submit", (e) =>{
         e.preventDefault()
         const content = e.target.elements.content.value
+        const images = upload.cachedFileArray || []
+        // console.log("hihi", images)
 
-        if(content){
-            socket.emit("CLIENT_SEND_MESSAGE", content)
+        if(content || images.length > 0){
+            socket.emit("CLIENT_SEND_MESSAGE", {
+                content: content,
+                images: images
+            })
             e.target.elements.content.value = ""
+            upload.resetPreviewPanel();
             socket.emit("CLIENT_SEND_TYPING", "hidden")
         }
     })

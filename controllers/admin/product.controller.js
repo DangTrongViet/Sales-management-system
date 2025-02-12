@@ -285,9 +285,11 @@ module.exports.editPatch = async (req, res)=>{
     req.body.position = parseInt(req.body.position)
 
     // Kiểm tra nếu có file ảnh mới được upload
-    if (req.file) {
-        req.body.thumbnail = `/uploads/${req.file.filename}`; // Đường dẫn ảnh mới
-    }
+    // console.log("o day nha", req.body)
+    // if (req.file) {
+    //     req.body.thumbnail = `/uploads/${req.file.fieldname}`; // Đường dẫn ảnh mới
+    //     console.log("o day nha", req.body.thumbnail)
+    // }
     // Cập nhật sản phẩm
     try {
         const updatedBy = {
