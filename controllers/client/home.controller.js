@@ -25,7 +25,7 @@ module.exports.index =  async(req, res)=>{ //Cái này là cú pháp đặt tên
     const newProductsNew = productHelper.priceNewProducts(productsNew)
 
     res.render("client/pages/home/index.pug", {
-        pageTitle: "Tranh chủ",
+        pageTitle: "Trang chủ",
         productsFeatured: newProductsFeatured,
         productsNew: newProductsNew
     })
