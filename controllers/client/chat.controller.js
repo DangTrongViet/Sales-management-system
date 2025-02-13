@@ -1,5 +1,6 @@
 const Chat = require("../../models/chat.model")
 const User = require("../../models/user.model")
+const uploadToClouddinary = require("../../helpers/uploadToClouddinary")
 
 
 //[GET] chat/
@@ -10,11 +11,18 @@ module.exports.index = async(req, res)=>{
     //SocketIo
     _io.once('connection', (socket) => {
         socket.on("CLIENT_SEND_MESSAGE", async(data)=>{
+
+            let images = []
+            for (const imageBuffer of data.images){
+                const link = await uploadToClouddinary(imageBuffer)
+                images.push(link)
+            }
+
             //Lưu vào data base
             const chat = new Chat({
                 user_id: userId,
                 content: data.content,
-                images: data.images
+                images: images
             })
             await chat.save()
 
@@ -23,7 +31,7 @@ module.exports.index = async(req, res)=>{
                 userId: userId,
                 fullName: fullName,
                 content: data.content,
-                images: data.images
+                images: images
             })
         })
 

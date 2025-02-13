@@ -339,7 +339,42 @@
     font-size: 16px;
 }
 
+.chat .inner-body .inner-images img {
+    width: 100px;
+    height: auto;
+    max-height: 150px;
+    object-fit: cover;
+    background: #efefef;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.chat .inner-body .inner-images img:hover {
+    transform: scale(1.05);
+}
+
+.chat .inner-body .inner-outgoing .inner-images {
+    margin-left: auto;
+    text-align: right;
+}
+
+.chat .inner-body .inner-outgoing .inner-images img {
+    margin: 5px 0 5px 5px;
+    border-radius: 10px 10px 0 10px;
+    background: #dcf8c6;
+}
+
+.chat .inner-body .inner-incoming .inner-images img {
+    margin: 5px 5px 5px 0;
+    border-radius: 10px 10px 10px 0;
+    background: #ffffff;
+}
+
 /* End chat */
+
 
 /*emoij-peicker*/
 .tooltip {
