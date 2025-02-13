@@ -1,10 +1,14 @@
 import * as Popper from 'https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js'
 
+// FileUploadWithPreview
 import { FileUploadWithPreview } from "https://unpkg.com/file-upload-with-preview/dist/index.js"
 const upload = new FileUploadWithPreview('upload-image',{
     multiple: true,
     maxFileCount: 6
 });
+//End FileUploadWithPreview
+
+
 
 // CLIENT_SEND_MESSAGE
 const formSendData = document.querySelector(".chat .inner-form")
@@ -71,6 +75,13 @@ socket.on("SERVER_RETURN_MASSAGE", (data)=>{
     
     body.insertBefore(div, boxTyping)
     body.scrollTop = body.scrollHeight
+
+
+    // Priview image
+    const boxImages = div.querySelector(".inner-images")
+    if(boxImages){
+        const gallery = new Viewer(boxImages);
+    }
 })
 // END_SERVER_RETURN_MASSAGE
 
@@ -157,3 +168,9 @@ if(elementListTyping){
 }
 
 //END_SERVER_RETURN_TYPING
+
+// Preview image
+if(bodyChat){
+    const gallery = new Viewer(bodyChat);
+}
+// End preview image

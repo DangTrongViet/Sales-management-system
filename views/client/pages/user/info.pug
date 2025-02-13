@@ -3,6 +3,21 @@ include ../../mixins/box-head.pug
 
 block main
     .container.my-3
-        .row
-            .col-12
+        .row.justify-content-center
+            .col-md-6
                 +box-head("Thông tin tài khoản")
+                .card.shadow-lg.rounded-3.p-3
+                    .card-body
+                        h5.text-center.mb-3 Thông tin người dùng
+                        .mb-2
+                            strong Họ và tên: 
+                            span.ms-2 #{user.fullName}
+                        .mb-2
+                            strong Email: 
+                            span.ms-2 #{user.email}
+                        .mb-3
+                            - var badgeClass = user.status === 'active' ? 'badge-success' : 'badge-danger'
+                            strong Trạng thái: 
+                            span.ms-2.badge(class=badgeClass) #{user.status}
+                        .text-center
+                            a.btn.btn-primary.btn-sm(href="/user/edit") Chỉnh sửa

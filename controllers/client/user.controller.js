@@ -211,7 +211,47 @@ password: 12345
 //Thông tin khách hàng
 //[GET] user/info
 module.exports.infoUser = async(req, res)=>{
+    const tokenUser = req.cookies.tokenUser
+    const user = await User.findOne({
+        tokenUser: tokenUser
+    })
     res.render("client/pages/user/info", {
         pageTitle: "Thông tin tài khoản",
+        user
     })
 }
+
+//[GET] user/edit
+module.exports.editInfoUser = async(req, res)=>{
+    const tokenUser = req.cookies.tokenUser
+    const user = await User.findOne({
+        tokenUser: tokenUser
+    })
+    res.render("client/pages/user/edit", {
+        pageTitle: "Chỉnh sửa thông tin tài khoản",
+        user
+    })
+}
+
+// [PATCH] /user/edit
+module.exports.editInfoUserPatch = async(req, res)=>{
+    const tokenUser = req.cookies.tokenUser
+
+    const user = await User.findOne({
+        tokenUser: tokenUser
+    })
+
+    if(user.password != req.body.password){
+        req.body.password = md5(req.body.password)
+    }
+
+    await User.updateOne(
+        {
+            tokenUser: tokenUser
+        },  req.body
+    )
+    req.flash('success', 'Cập nhập tài khoản thành công!');
+    res.redirect("/user/info")
+}
+
+//MK: 12345

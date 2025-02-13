@@ -26,5 +26,8 @@ router.post('/password/reset',validate.resetPasswordPost, controller.resetPasswo
 
 router.get('/info',authMiddleware.requireAuth, controller.infoUser)
 
+router.get('/edit', controller.editInfoUser)
+router.patch('/edit',authMiddleware.requireAuth, controller.editInfoUserPatch)
+
 
 module.exports = router
