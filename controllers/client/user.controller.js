@@ -223,9 +223,9 @@ module.exports.infoUser = async(req, res)=>{
 
 //[GET] user/edit
 module.exports.editInfoUser = async(req, res)=>{
-    const tokenUser = req.cookies.tokenUser
+    const userId = res.locals.user.id; 
     const user = await User.findOne({
-        tokenUser: tokenUser
+        _id: userId
     })
     res.render("client/pages/user/edit", {
         pageTitle: "Chỉnh sửa thông tin tài khoản",
@@ -235,10 +235,9 @@ module.exports.editInfoUser = async(req, res)=>{
 
 // [PATCH] /user/edit
 module.exports.editInfoUserPatch = async(req, res)=>{
-    const tokenUser = req.cookies.tokenUser
-
+    const userId = res.locals.user.id; 
     const user = await User.findOne({
-        tokenUser: tokenUser
+        _id: userId
     })
 
     if(user.password != req.body.password){
@@ -247,7 +246,7 @@ module.exports.editInfoUserPatch = async(req, res)=>{
 
     await User.updateOne(
         {
-            tokenUser: tokenUser
+            _id: userId
         },  req.body
     )
     req.flash('success', 'Cập nhập tài khoản thành công!');

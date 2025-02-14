@@ -1,6 +1,11 @@
 const express = require('express')
 const router = express.Router()
 
+const multer  = require('multer'); //Thư viện để upload ảnh
+const upload = multer()
+
+const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware.js")
+
 const controller = require("../../controllers/client/user.controller.js")
 const validate = require("../../validate/client/user.validate.js") 
 const authMiddleware = require("../../middlewares/client/auth.middleware.js")
@@ -26,8 +31,13 @@ router.post('/password/reset',validate.resetPasswordPost, controller.resetPasswo
 
 router.get('/info',authMiddleware.requireAuth, controller.infoUser)
 
-router.get('/edit', controller.editInfoUser)
-router.patch('/edit',authMiddleware.requireAuth, controller.editInfoUserPatch)
+router.get('/edit', 
+    controller.editInfoUser)
+router.patch('/edit',
+    upload.single('avatar'), 
+    uploadCloud.upload,
+    authMiddleware.requireAuth, 
+    controller.editInfoUserPatch)
 
 
 module.exports = router
