@@ -53,7 +53,7 @@ block main
                         label(for="avatar").fw-bold Avatar
                         .d-flex.flex-column.align-items-center
                             img.rounded-circle.border.mt-2(
-                                src=user.avatar
+                                src=user.avatar ? user.avatar : "/images/user-avatar.svg.png",
                                 alt="Avatar"
                                 width="80"
                                 height="80"
