@@ -1,10 +1,8 @@
 const User = require("../../models/user.model")
 const usersSocket = require("../../sockets/client/users.socket")
 
-//Mai cần làm
-//1. //dung usserId này chỉnh cho trang infoUser
-//2. làm tính năng upload ảnh cho user để hiển thị ra 
 
+//[GET] users/not-friend
 module.exports.notFriend = async(req, res) =>{
     //Socket 
     usersSocket(res)
@@ -35,3 +33,28 @@ module.exports.notFriend = async(req, res) =>{
 }
 
 //1:00:05
+
+//[GET] users/request
+module.exports.request = async(req, res) =>{
+    //Socket 
+    usersSocket(res)
+    //End socket
+
+    const userId = res.locals.user.id;
+    const myUser = await User.findOne({
+        _id: userId,
+    })
+
+    const requestFriends = myUser.requestFriends
+
+    const users = await User.find({
+        _id: {$in: requestFriends},
+        status: "active",
+        deleted: false
+    }).select("id avatar fullName")
+
+    res.render("client/pages/users/request", {
+        pageTitle: "Lời mời đã gửi",
+        users: users
+    })
+}
