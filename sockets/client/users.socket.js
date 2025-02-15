@@ -46,7 +46,7 @@ module.exports = async(res)=>{
             })
         })
 
-        //NGƯỜI DÙNG HUWYR GỬI YÊU CẦU KẾT BẠN
+        //NGƯỜI DÙNG HỦY GỬI YÊU CẦU KẾT BẠN
         socket.on("CLIENT_CANCEL_FRIEND", async(userId)=>{
             const myUserId = res.locals.user.id; 
 
@@ -76,6 +76,17 @@ module.exports = async(res)=>{
                     $pull: {requestFriends: userId}
                 })
             }
+
+            //Lấy độ dài acceptFriend của B để trả về cho B
+            const infoUserB = await User.findOne({
+                _id: userId
+            })
+            const lengthAcceptFriends = infoUserB.acceptFriends.length
+
+            socket.broadcast.emit("SERVER_RETURN_LENGTH_ACCEPT_FRIEND",{
+                userId: userId,
+                lengthAcceptFriends: lengthAcceptFriends
+            })
         })
 
         //NGƯỜI DÙNG TỪ CHỐI KẾT BẠN
