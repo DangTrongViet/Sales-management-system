@@ -22,10 +22,27 @@ if(listButtonCancelFriend.length > 0){
         button.addEventListener("click", ()=>{
             button.closest(".box-user").classList.remove("add")
             const userId = button.getAttribute("btn-cancel-friend")
-            console.log("o day nha ma",userId)
 
             socket.emit("CLIENT_CANCEL_FRIEND", userId)
         })
     })
 }
 //End Chức năng hủy gửi yêu cầu
+
+
+//Chức nawmng từ chối kết bạn
+const listButtonRefuseFriend = document.querySelectorAll("[btn-refuse-friend]")
+
+if(listButtonRefuseFriend.length > 0){
+    listButtonRefuseFriend.forEach(button =>{
+        button.addEventListener("click", ()=>{
+            button.closest(".box-user").classList.add("refuse")
+
+            const userId = button.getAttribute("btn-refuse-friend")
+            //console.log("o day nha ma",userId)
+
+            socket.emit("CLIENT_REFUSE_FRIEND", userId)
+        })
+    })
+}
+//End chức năng từ chối kết bạn
