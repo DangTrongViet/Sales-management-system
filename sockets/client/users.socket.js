@@ -33,6 +33,17 @@ module.exports = async(res)=>{
                     $push: {requestFriends: userId}
                 })
             }
+
+            //Lấy độ dài accept friend của B để trả về cho B
+            const infoUserB = await User.findOne({
+                _id: userId
+            })
+            const lengthAcceptFriends = infoUserB.acceptFriends.length
+
+            socket.broadcast.emit("SERVER_RETURN_LENGTH_ACCEPT_FRIEND",{
+                userId: userId,
+                lengthAcceptFriends: lengthAcceptFriends
+            })
         })
 
         //NGƯỜI DÙNG HUWYR GỬI YÊU CẦU KẾT BẠN
