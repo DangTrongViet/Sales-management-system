@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
     
     acceptFriends: Array,//Danh sách người gửi kb cho ô A
     requestFriends: Array,//Danh sách người mà ô A gửi kb
-
+    statusOnline: String,
     status: {
         type: String,
         default: "active"

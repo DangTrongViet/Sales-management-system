@@ -83,3 +83,10 @@ module.exports.accept = async(req, res) =>{
         users: users
     })
 }
+
+//[GET] users/friends
+module.exports.friends = async(req, res) =>{
+    res.render("client/pages/users/friends", {
+        pageTitle: "Danh sách bạn bè",
+    })
+}
