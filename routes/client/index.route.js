@@ -12,7 +12,7 @@ const authMiddleware = require("../../middlewares/client/auth.middleware.js")
 
 const usersRoute = require("./users.route.js") //route này dung để quản lý chức năng chat
 const userRoute = require("./user.route.js") //Route này dùng để quản lý người dùng trang web bên client
-
+const RoomChatRoute = require("./rooms-chat.route.js")
 //Tách riêng các thằng routes này ra để dễ quản lý
 module.exports = (app)=>{ //Lệnh này là exports trong express
     app.use(categoryMiddleware.category)
@@ -38,4 +38,6 @@ module.exports = (app)=>{ //Lệnh này là exports trong express
     app.use("/chat",authMiddleware.requireAuth, chatRoute)
 
     app.use("/users",authMiddleware.requireAuth, usersRoute)
+
+    app.use("/rooms-chat",authMiddleware.requireAuth, RoomChatRoute)
 }
