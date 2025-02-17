@@ -47,6 +47,3 @@ module.exports = async(req, res)=>{
     })
 }
 
-//1:00:09
-//Lỗi: load lại trang k thấy tin nhắn nữa
-//Lỗi: sau khi kết bạn vẫn thấy bên trang danh sách người dùng
