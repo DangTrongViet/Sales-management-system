@@ -9,3 +9,10 @@ module.exports.index = async(req, res)=>{
         pageTitle: "Danh sách phòng",
     })
 }
+
+//[GET] rooms-chat/create
+module.exports.create = async(req, res)=>{
+    res.render("client/pages/rooms-chat/create", {
+        pageTitle: "Tạo phòng chat",
+    })
+}
