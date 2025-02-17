@@ -158,9 +158,7 @@ module.exports = async(res)=>{
             let roomChat
             if(existUserAInB && existUserBInA){
                 roomChat = new RoomChat({
-                    avatar: String,
                     typeRoom: "friend", 
-                    status: String,
                     users: [
                         {
                             user_id: userId,
@@ -172,6 +170,7 @@ module.exports = async(res)=>{
                         }
                     ],
                 })
+                await roomChat.save()
             }
 
             //Xóa id của A vào aceptFriends của B
@@ -184,7 +183,7 @@ module.exports = async(res)=>{
                     $push: {
                         friendList: {
                             user_id: userId,
-                            room_chat_id: ""
+                            room_chat_id: roomChat.id
                         }
                     },
                     $pull: {acceptFriends: userId}
@@ -201,7 +200,7 @@ module.exports = async(res)=>{
                     $push: {
                         friendList: {
                             user_id: myUserId,
-                            room_chat_id: ""
+                            room_chat_id: roomChat.id
                         }
                     },
                     $pull: {requestFriends: myUserId}

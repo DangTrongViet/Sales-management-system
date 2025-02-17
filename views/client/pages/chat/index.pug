@@ -19,7 +19,7 @@ block main
                             div(class=(chat.infoUser.id == user.id ? "inner-outgoing" : "inner-incoming"))
                                 if(chat.infoUser.id != user.id)
                                     .inner-name #{chat.infoUser.fullName}
-                                if(content)
+                                if(chat.content)
                                     .inner-content
                                         | #{chat.content}
                                 if(chat.images)
