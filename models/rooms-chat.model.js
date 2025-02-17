@@ -4,6 +4,14 @@ const roomChatSchema = new mongoose.Schema(
   {
     title: String,
     avatar: String,
+    typeRoom: String, //friend (=2) or group (>=2)
+    status: String,
+    users: [
+        {
+            user_id: String,
+            role: String
+        }
+    ],
     deleted: {
         type: Boolean,
         default: false

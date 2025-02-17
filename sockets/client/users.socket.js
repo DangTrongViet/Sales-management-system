@@ -1,4 +1,5 @@
 const User = require("../../models/user.model")
+const RoomChat = require("../../models/rooms-chat.model")
 
 module.exports = async(res)=>{
     //SocketIo
@@ -141,12 +142,40 @@ module.exports = async(res)=>{
         socket.on("CLIENT_ACCEPT_FRIEND", async(userId)=>{
             const myUserId = res.locals.user.id; 
 
-            //Xóa id của A vào aceptFriends của B
-            //Thêm {user_id, room_chat_id} của A vào friendList của B
+            //Lấy ra user đã tồn tại 
             const existUserAInB = await User.findOne({
                 _id: myUserId,
                 acceptFriends: userId
             })
+
+            const existUserBInA = await User.findOne({
+                _id: userId,
+                requestFriends: myUserId
+            })
+
+
+            // Tao phòng chat
+            let roomChat
+            if(existUserAInB && existUserBInA){
+                roomChat = new RoomChat({
+                    avatar: String,
+                    typeRoom: "friend", 
+                    status: String,
+                    users: [
+                        {
+                            user_id: userId,
+                            role: "supperAdmin"
+                        },
+                        {
+                            user_id: myUserId,
+                            role: "supperAdmin"
+                        }
+                    ],
+                })
+            }
+
+            //Xóa id của A vào aceptFriends của B
+            //Thêm {user_id, room_chat_id} của A vào friendList của B
 
             if(existUserAInB){
                 await User.updateOne({
@@ -164,11 +193,7 @@ module.exports = async(res)=>{
 
             //Xóa id của B vào requestFriends của A
             //Thêm {user_id, room_chat_id} của B vào friendList của A
-            const existUserBInA = await User.findOne({
-                _id: userId,
-                requestFriends: myUserId
-            })
-
+    
             if(existUserBInA){
                 await User.updateOne({
                     _id: userId
@@ -182,6 +207,8 @@ module.exports = async(res)=>{
                     $pull: {requestFriends: myUserId}
                 })
             }
+
+
         })
     })
 }
