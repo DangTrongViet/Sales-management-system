@@ -45,7 +45,7 @@ A **web-based sales management system** built using **Node.js, Express.js, Mongo
 MVC is a popular software architecture that helps separate the components in an application. Here is the MVC pattern for this system:
 
 <p align="center">
-  <img src="https://github.com/trgtanhh04/Clinic-management/blob/main/mvc.png" width="60%" alt="MVC Pattern">
+  <img src="https://github.com/trgtanhh04/Clinic-management/blob/main/mvc.png" width="70%" alt="MVC Pattern">
 </p>
 
 ---
