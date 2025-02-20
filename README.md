@@ -50,6 +50,12 @@ MVC is a popular software architecture that helps separate the components in an 
 
 ---
 
+## 🎥 Video Demo
+
+[![Watch Video](https://img.shields.io/badge/Youtube-Clinic%20Management-red?logo=youtube)](https://youtu.be/mjyDzThRdGM?si=HIIRGrxNZKDJRdgM)
+
+---
+
 ## 📌 How to Run  
 
 ### 1. **Clone the Repository**  
