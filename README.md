@@ -40,8 +40,13 @@ A **web-based sales management system** built using **Node.js, Express.js, Mongo
 - **Authentication:** Session-based login with secure user validation.  
 
 ---
-## MVC Parten
-![MVC](https://github.com/trgtanhh04/Sales-management-system/blob/main/mvc%20-%20Copy.png)
+## MVC Pattern
+
+MVC is a popular software architecture that helps separate the components in an application. Here is the MVC pattern for this system:
+
+<p align="center">
+  <img src="https://github.com/trgtanhh04/Clinic-management/blob/main/mvc.png" width="60%" alt="MVC Pattern">
+</p>
 
 ---
 
