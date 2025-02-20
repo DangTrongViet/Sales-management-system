@@ -51,8 +51,10 @@ git clone https://github.com/trgtanhh04/Sales-management-system.git
 cd Sales-management-system
 ```
 ### 2. Install Dependencies
-Run the following command to install all necessary libraries from **library.txt**
-
+Run the following command to install all necessary libraries from package.json:
+```bash
+npm install
+```
 ### 3. Run the Server
 Navigate to the Backend folder and start the server:
 ```bash
