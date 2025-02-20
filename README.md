@@ -39,3 +39,17 @@ A **web-based sales management system** built using **Node.js, Express.js, Mongo
 ```bash
 git clone https://github.com/trgtanhh04/Sales-management-system.git
 cd Sales-management-system
+```
+### 2️⃣ Install Dependencies
+Run the following command to install all necessary libraries from library.txt:
+
+### 3️⃣ Run the Server
+Navigate to the Backend folder and start the server:
+```bash
+npm start
+```
+The server runs on port 3000 by default
+
+### 4  Access the Application
+Admin Panel: [https/local ](http://localhost:3000/admin)
+Client App: [https/local ](http://localhost:3000/)
