@@ -9,8 +9,8 @@ A **web-based sales management system** built using **Node.js, Express.js, Mongo
 ## Features  
 
 <p align="center">
-  <img src=https://github.com/trgtanhh04/Sales-management-system/blob/main/admin.png width="45%" alt="Admin Dashboard">
-  <img src=https://github.com/trgtanhh04/Sales-management-system/blob/main/client.png width="45%" alt="Client Dashboard">
+  <img src=https://github.com/trgtanhh04/Sales-management-system/blob/main/admin.png width="60%" alt="Admin Dashboard">
+  <img src=https://github.com/trgtanhh04/Sales-management-system/blob/main/client.png width="60%" alt="Client Dashboard">
 </p>
 
 
