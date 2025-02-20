@@ -38,6 +38,10 @@ A **web-based sales management system** built using **Node.js, Express.js, Mongo
 - **Authentication:** Session-based login with secure user validation.  
 
 ---
+## MVC Parten
+![MVC](https://github.com/trgtanhh04/Sales-management-system/blob/main/mvc%20-%20Copy.png)
+
+---
 
 ## 📌 How to Run  
 
