@@ -51,5 +51,5 @@ npm start
 The server runs on port 3000 by default
 
 ### 4  Access the Application
-Admin Panel: [https/local ](http://localhost:3000/admin)
-Client App: [https/local ](http://localhost:3000/)
+- Admin Panel: http://localhost:3000/admin
+- Client App: http://localhost:3000/
