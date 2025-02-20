@@ -56,7 +56,7 @@ Run the following command to install all necessary libraries from package.json:
 npm install
 ```
 ### 3. Run the Server
-Navigate to the Backend folder and start the server:
+Navigate to the folder and start the server:
 ```bash
 npm start
 ```
