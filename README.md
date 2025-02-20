@@ -1,5 +1,7 @@
 # Sales Management System  
 
+## Overview
+
 A **web-based sales management system** built using **Node.js, Express.js, MongoDB, and Socket.io**, following the **MVC architecture**. This system provides **admin controls** for managing products, users, and permissions, along with a **customer-friendly shopping experience** featuring real-time chat and friend management.  
 
 ---
