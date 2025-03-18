@@ -52,7 +52,7 @@ MVC is a popular software architecture that helps separate the components in an 
 
 ## 🎥 Video Demo
 
-[![Watch Video](https://img.shields.io/badge/Youtube-Clinic%20Management-red?logo=youtube)](https://youtu.be/mjyDzThRdGM?si=HIIRGrxNZKDJRdgM)
+[![Watch Video](https://img.shields.io/badge/Youtube-Sale%20Management-red?logo=youtube)](https://youtu.be/mjyDzThRdGM?si=HIIRGrxNZKDJRdgM)
 
 ---
 
