@@ -58,7 +58,13 @@ MVC là một mô hình kiến trúc phần mềm phổ biến giúp phân tách
 
 ## **Triển khai trên Vercel**  
 - **Ứng dụng khách hàng:** [https://sale-management-website.vercel.app/](https://sale-management-website.vercel.app/)  
+- **Ứng dụ admin:** [https://sale-management-website.vercel.app/](https://sale-management-website.vercel.app/admin/dashboard)  
 
+Note: với úng dụng admin bạn đăng nhập tài khoản sau dưới quyền quản lý nội dung
+```bash
+email: truongtienanh16@gmail.com
+password: 12345
+```
 ---
 
 ## 📌 **Hướng Dẫn Chạy Ứng Dụng**  
