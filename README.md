@@ -13,14 +13,14 @@ Một **hệ thống quản lý bán hàng trên nền tảng web** được xâ
   <img src="https://github.com/trgtanhh04/Sales-management-system/blob/main/client.png" width="48%" alt="Giao diện khách hàng">
 </p>
 
-### **Bảng Điều Khiển Quản Trị**  
+### **Admin**  
 - **Tổng Quan** – Hiển thị số liệu thống kê và phân tích doanh số.  
 - **Danh Mục Sản Phẩm** – Quản lý danh mục sản phẩm một cách hiệu quả.  
 - **Danh Sách Sản Phẩm** – Xem, thêm, cập nhật và xóa sản phẩm.  
 - **Nhóm Quyền & Phân Quyền** – Phân quyền và xác định mức truy cập.  
 - **Quản Lý Tài Khoản Người Dùng** – Kiểm soát và quản lý người dùng đã đăng ký.  
 
-### **Tính Năng Dành Cho Khách Hàng**  
+### **Client**  
 - **Trang Chủ** – Hiển thị các sản phẩm nổi bật và chương trình khuyến mãi.  
 - **Sản Phẩm** – Duyệt và tìm kiếm sản phẩm.  
 - **Giỏ Hàng** – Thêm, xóa và cập nhật sản phẩm trong giỏ hàng.  
