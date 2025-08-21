@@ -56,8 +56,8 @@ MVC là một mô hình kiến trúc phần mềm phổ biến giúp phân tách
 
 Note: với úng dụng admin bạn đăng nhập tài khoản sau dưới quyền quản lý nội dung
 ```bash
-email: truongtienanh16@gmail.com
-password: 12345
+email: vietkun2k4@gmail.com
+password: 123456
 ```
 ---
 
