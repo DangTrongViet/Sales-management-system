@@ -51,8 +51,8 @@ MVC là một mô hình kiến trúc phần mềm phổ biến giúp phân tách
 ---
 
 ## **Triển khai trên Vercel**  
-- **Ứng dụng client:** [https://sale-management-website.vercel.app/](https://sale-management-website.vercel.app/)  
-- **Ứng dụung admin:** [https://sale-management-website.vercel.app/](https://sale-management-website.vercel.app/admin/dashboard)  
+- **Ứng dụng client:** [https://sales-management-system-seven.vercel.app/](https://sales-management-system-seven.vercel.app/)  
+- **Ứng dụung admin:** [https://sales-management-system-seven.vercel.app/](https://sales-management-system-seven.vercel.app/admin/dashboard)  
 
 Note: với úng dụng admin bạn đăng nhập tài khoản sau dưới quyền quản lý nội dung
 ```bash
