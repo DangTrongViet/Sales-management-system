@@ -9,7 +9,7 @@ include ../../mixins/moment.pug
 
 block main 
   +alert-success("5000")
-  if (role.permissions.includes("products_view"))
+  if (role.permission.includes("products-view"))
     h1 Danh sách sản phẩm
     
     .card.mb-3 
@@ -39,7 +39,7 @@ block main
           .col-8
             +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
           .col-4
-            if (role.permissions.includes("products_create"))
+            if (role.permission.includes("products-create"))
               a(
                 href= `${prefixAdmin}/products/create`
                 class= "btn btn-outline-success"
@@ -83,7 +83,7 @@ block main
                     min="1"
                     name="position")
                 td
-                  if (role.permissions.includes("products_edit"))
+                  if (role.permission.includes("products-edit"))
                     if(item.status=="active")
                       a(
                         href="javascript:;" 
@@ -113,21 +113,21 @@ block main
                       +formatDateTime(updatedBy.updatedAt)
 
                 td
-                  if (role.permissions.includes("products_detail"))
+                  if (role.permission.includes("products-detail"))
                     a(
                       href=`${prefixAdmin}/products/detail/${item.id}`
                       class="btn btn-secondary btn-sm"
                       data-id = item.id
                       ) Chi tiết
 
-                  if (role.permissions.includes("products_edit"))
+                  if (role.permission.includes("products-edit"))
                     a(
                       href=`${prefixAdmin}/products/edit/${item.id}`
                       class="btn btn-warning btn-sm"
                       data-id = item.id
                       ) Sửa
                   
-                  if (role.permissions.includes("products_delete"))
+                  if (role.permission.includes("products-delete"))
                     button(
                       class="btn btn-danger btn-sm ml-1"
                       data-id = item.id

@@ -1,7 +1,7 @@
 extend ../../layouts/default.pug
 
 block main
-    if (role.permissions.includes("roles_detail"))
+    if (role.permission.includes("roles-detail"))
         h1(class="mb-4") Chi tiết nhóm quyền
         
         div(class="form-group")

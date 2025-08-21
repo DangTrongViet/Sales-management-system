@@ -2,7 +2,7 @@ extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 
 block main 
-  if (role.permissions.includes("accounts_detail"))
+  if (role.permission.includes("accounts-detail"))
     +alert-error("5000")
     +alert-success("5000")
     .container

@@ -3,23 +3,23 @@
     ul
       li
         a(href=`${prefixAdmin}/dashboard`) Tổng quan
-      if (role.permissions.includes("products-category_view"))
+      if (role.permission.includes("products-category-view"))
         li
           a(href=`${prefixAdmin}/products-category`) Danh mục sản phẩm
 
-      if (role.permissions.includes("products_view"))
+      if (role.permission.includes("products-view"))
         li
           a(href=`${prefixAdmin}/products`) Danh sách sản phẩm
 
-      if (role.permissions.includes("roles_view"))
+      if (role.permission.includes("roles-view"))
         li
           a(href=`${prefixAdmin}/roles`) Nhóm quyền
       
-      if (role.permissions.includes("roles_permissions"))
+      if (role.permission.includes("roles-permissions"))
         li
           a(href=`${prefixAdmin}/roles/permissions`) Phân quyền
       
-      if (role.permissions.includes("accounts_view"))
+      if (role.permission.includes("accounts-view"))
         li
           a(href=`${prefixAdmin}/accounts`) Danh sách tài khoản
       li

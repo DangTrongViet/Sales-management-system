@@ -3,7 +3,7 @@ include ../../mixins/alert.pug
 
 
 block main
-  if (role.permissions.includes("products_edit"))
+  if (role.permission.includes("products-edit"))
     +alert-success("5000") 
     h1 Trang danh sách sản phẩm bị xóa
     a.btn.btn-primary(href="/admin/products") Trở lại trang sản phẩm

@@ -3,7 +3,7 @@ include ../../mixins/alert.pug
 include ../../mixins/select-tree.pug
 
 block main
-  if (role.permissions.includes("products-category_edit"))
+  if (role.permission.includes("products-category-edit"))
     +alert-success("5000")
     +alert-error("5000")
     h1(class="mb-4") Chỉnh sửa sản phẩm 

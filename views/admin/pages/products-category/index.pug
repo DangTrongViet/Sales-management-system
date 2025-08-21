@@ -3,7 +3,7 @@ include ../../mixins/table-tree.pug
 include ../../mixins/alert.pug
 
 block main
-  if (role.permissions.includes("products-category_view"))
+  if (role.permission.includes("products-category-view"))
     h1 Danh mục sản phẩm
     
     .card.mb-3 

@@ -15,10 +15,11 @@ module.exports.requireAuth = async(req, res, next)=>{
         }else{
             const role = await Role.findOne({
                 _id: user.role_id
-            }).select("title permissions")
+            }).select("title permission")
             //Trả thông tin user và role về cho frontend
             res.locals.user = user;
             res.locals.role = role;
+   
             next()
         }
     }

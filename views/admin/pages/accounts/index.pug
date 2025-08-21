@@ -1,7 +1,7 @@
 extends ../../layouts/default.pug
 
 block main
-  if (role.permissions.includes("accounts_view"))
+  if (role.permission.includes("accounts-view"))
     h1(class="mb-4") Danh sách tài khoản 
 
     .card.mb-3 
@@ -10,7 +10,7 @@ block main
         .row 
           .col-8 
           .col-4.text-right
-            if (role.permissions.includes("accounts_create")) 
+            if (role.permission.includes("accounts-create")) 
               a(
                 href=`${prefixAdmin}/accounts/create`
                 class="btn btn-outline-success"
@@ -42,7 +42,7 @@ block main
                 td #{item.role.title}
                 td #{item.email}
                 td 
-                  if (role.permissions.includes("accounts_edit"))
+                  if (role.permission.includes("accounts-edit"))
                     if(item.status === "active")
                       a(
                         href="javascript:;"
@@ -56,19 +56,19 @@ block main
                         data-status="inactive"
                       ) Dừng hoạt động
                 td 
-                  if (role.permissions.includes("accounts_detail"))
+                  if (role.permission.includes("accounts-detail"))
                     a(
                       class="btn btn-secondary btn-sm"
                       href=`${prefixAdmin}/accounts/detail/${item.id}`
                     ) Chi tiết
 
-                  if (role.permissions.includes("accounts_edit"))
+                  if (role.permission.includes("accounts-edit"))
                     a(
                       class="btn btn-warning btn-sm ml-1"
                       href=`${prefixAdmin}/accounts/edit/${item.id}`
                     ) Sửa
                   
-                  if (role.permissions.includes("accounts_delete"))
+                  if (role.permission.includes("accounts-delete"))
                     button(
                       class="btn btn-danger btn-sm ml-1"
                       data-id = item.id

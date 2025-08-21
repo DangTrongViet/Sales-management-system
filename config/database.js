@@ -2,6 +2,7 @@
 const mongoose = require('mongoose')
 module.exports.connect = async () =>{
     try {
+        console.log(process.env.MONGO_URL)
         mongoose.connect(process.env.MONGO_URL)
         console.log("Connect success")
     } catch (error) {

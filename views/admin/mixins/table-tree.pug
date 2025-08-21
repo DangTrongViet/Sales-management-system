@@ -20,7 +20,7 @@ mixin table-tree(items, level = 1)
             min="1"
             name="position")
         td 
-          if (role.permissions.includes("products-category_edit"))
+          if (role.permission.includes("products-category-edit"))
             if(item.status=="active")
               a(
                   href="javascript:;" 
@@ -39,21 +39,21 @@ mixin table-tree(items, level = 1)
               ) Ngừng hoạt động 
              
         td
-          if (role.permissions.includes("products-category_detail"))
+          if (role.permission.includes("products-category-detail"))
             a(
               href=`${prefixAdmin}/products-category/detail/${item.id}`
               class="btn btn-secondary btn-sm"
               data-id = item.id
               ) Chi tiết
 
-          if (role.permissions.includes("products-category_edit"))
+          if (role.permission.includes("products-category-edit"))
             a(
               href=`${prefixAdmin}/products-category/edit/${item.id}`
               class="btn btn-warning btn-sm"
               data-id = item.id
               ) Sửa
 
-          if (role.permissions.includes("products-category_delete"))
+          if (role.permission.includes("products-category-delete"))
             button(
               class="btn btn-danger btn-sm ml-1"
               data-id = item.id

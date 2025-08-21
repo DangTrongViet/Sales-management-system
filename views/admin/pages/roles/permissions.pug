@@ -2,7 +2,7 @@ extend ../../layouts/default.pug
 include ../../mixins/alert.pug
 
 block main
-  if (role.permissions.includes("roles_permissions"))
+  if (role.permission.includes("roles-permissions"))
     +alert-error("5000")
     +alert-success("5000")
     h1(class="mb-4") Phân quyền 
@@ -37,31 +37,31 @@ block main
           tr 
             td(colspan="4")
               b Danh mục sản phẩm  
-          tr(data-name="products-category_view")
+          tr(data-name="products-category-view")
             td Xem 
             each item in records
               td(class="text-center")
                 input(type="checkbox")
 
-          tr(data-name="products-category_create")
+          tr(data-name="products-category-create")
             td Thêm mới
             each item in records
               td(class="text-center")
                 input(type="checkbox")
 
-          tr(data-name="products-category_edit")
+          tr(data-name="products-category-edit")
             td Chỉnh sửa
             each item in records
               td(class="text-center")
                 input(type="checkbox")
 
-          tr(data-name="products-category_detail")
+          tr(data-name="products-category-detail")
             td Chi tiết
             each item in records
               td(class="text-center")
                 input(type="checkbox")
 
-          tr(data-name="products-category_delete")
+          tr(data-name="products-category-delete")
             td Xóa
             each item in records
               td(class="text-center")
@@ -71,31 +71,31 @@ block main
           tr 
             td(colspan="4")
               b Danh sách sản phẩm  
-          tr(data-name="products_view")
+          tr(data-name="products-view")
             td Xem 
             each item in records
               td(class="text-center")
                 input(type="checkbox")
 
-          tr(data-name="products_create")
+          tr(data-name="products-create")
             td Thêm mới
             each item in records
               td(class="text-center")
                 input(type="checkbox")
 
-          tr(data-name="products_edit")
+          tr(data-name="products-edit")
             td Chỉnh sửa
             each item in records
               td(class="text-center")
                 input(type="checkbox")
 
-          tr(data-name="products_detail")
+          tr(data-name="products-detail")
             td Chi tiết
             each item in records
               td(class="text-center")
                 input(type="checkbox")
 
-          tr(data-name="products_delete")
+          tr(data-name="products-delete")
             td Xóa
             each item in records
               td(class="text-center")
@@ -105,37 +105,37 @@ block main
           tr 
             td(colspan="4")
               b Nhóm quyền
-          tr(data-name="roles_view")
+          tr(data-name="roles-view")
             td Xem 
             each item in records
               td(class="text-center")
                 input(type="checkbox")
 
-          tr(data-name="roles_create")
+          tr(data-name="roles-create")
             td Thêm mới
             each item in records
               td(class="text-center")
                 input(type="checkbox")
 
-          tr(data-name="roles_edit")
+          tr(data-name="roles-edit")
             td Chỉnh sửa
             each item in records
               td(class="text-center")
                 input(type="checkbox")
           
-          tr(data-name="roles_detail")
+          tr(data-name="roles-detail")
             td Chi tiết
             each item in records
               td(class="text-center")
                 input(type="checkbox")
 
-          tr(data-name="roles_delete")
+          tr(data-name="roles-delete")
             td Xóa
             each item in records
               td(class="text-center")
                 input(type="checkbox")
 
-          tr(data-name="roles_permissions")
+          tr(data-name="roles-permissions")
             td Phân quyền
             each item in records
               td(class="text-center")
@@ -145,31 +145,51 @@ block main
           tr 
             td(colspan="4")
               b Tài khoản
-          tr(data-name="accounts_view")
+          tr(data-name="accounts-view")
             td Xem 
             each item in records
               td(class="text-center")
                 input(type="checkbox")
 
-          tr(data-name="accounts_create")
+          tr(data-name="accounts-create")
             td Thêm mới
             each item in records
               td(class="text-center")
                 input(type="checkbox")
 
-          tr(data-name="accounts_edit")
+          tr(data-name="accounts-edit")
             td Chỉnh sửa
             each item in records
               td(class="text-center")
                 input(type="checkbox")
           
-          tr(data-name="accounts_detail")
+          tr(data-name="accounts-detail")
             td Chi tiết
             each item in records
               td(class="text-center")
                 input(type="checkbox")
 
-          tr(data-name="accounts_delete")
+          tr(data-name="accounts-delete")
+            td Xóa
+            each item in records
+              td(class="text-center")
+                input(type="checkbox")
+          tr 
+            td(colspan="4")
+              b Thùng rác
+          tr(data-name="trash-view")
+            td Xem 
+            each item in records
+              td(class="text-center")
+                input(type="checkbox")
+          
+          tr(data-name="trash-reset")
+            td Khôi phục
+            each item in records
+              td(class="text-center")
+                input(type="checkbox")
+
+          tr(data-name="trash-delete")
             td Xóa
             each item in records
               td(class="text-center")
